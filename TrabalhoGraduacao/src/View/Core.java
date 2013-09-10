@@ -1,9 +1,11 @@
-package dm.trabalhograduacao;
+package View;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
+
+import dm.trabalhograduacao.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -17,12 +19,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Toast;
 
-public class Main extends Activity {
-	private SeekBar sbLight;
+public class Core extends Activity {
 	private ImageView imgLight;
 	private boolean imgClicked = false;
 	
@@ -45,26 +44,12 @@ public class Main extends Activity {
 	        configureSocketAndStream();
         }catch (Exception e){}
         
-        sbLight.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-
-			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				updateImage(progress);
-				sendData(String.valueOf((progress)));
-			}
-        	
-        	public void onStartTrackingTouch(SeekBar seekBar) {}
-        	
-			public void onStopTrackingTouch(SeekBar seekBar) {}
-		});
-        
         imgLight.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				if (imgClicked){
-					sbLight.setProgress(0);
 					sendData("0");
 					imgClicked = false ;
 				}else{
-					sbLight.setProgress(100);
 					sendData("9");
 					imgClicked = true ;
 				}
@@ -74,15 +59,9 @@ public class Main extends Activity {
 
     private void initObjects() throws Exception{
     	try{
-	    	sbLight = (SeekBar) findViewById(R.id.sbLight);
-	    	sbLight.setMax(9);
 	    	imgLight = (ImageView) findViewById(R.id.imgLight);
 	    	findViewById(R.id.imgLight).setKeepScreenOn(true);
 	    	btAdapter = BluetoothAdapter.getDefaultAdapter();
-//	    	Bluetooth b = new Bluetooth();
-//	    	Thread thr = new Thread(b.run());
-//	    	thr.start();
-	    	
     	}catch (Exception e){
     		Toast.makeText(getBaseContext(), "Falha ao Inicializar os Objetos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     	}
@@ -109,27 +88,19 @@ public class Main extends Activity {
 			BluetoothDevice device = btAdapter.getRemoteDevice(address);
 			try{
 				btSocket = createBluetoothSocket(device);
-			}catch(Exception e){
-				Toast.makeText(getBaseContext(), "Falha configureSocket: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-			}			
+			}catch(Exception e){}
+			
 			btAdapter.cancelDiscovery();			
-			Log.d(TAG, "...Conectando");
 			try{
 				btSocket.connect();
-				Log.d(TAG, "...Conectado");
 			}catch(IOException e){
 				try{
 					btSocket.close();
-				}catch(IOException e1){
-					Toast.makeText(getBaseContext(), "Falha no conect configureSocket: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-				}
+				}catch(IOException e1){}
 			}
-			Log.d(TAG, "...Socket Criado");
 			try{
 				outStream = btSocket.getOutputStream();
-			}catch(IOException e){
-				Toast.makeText(getBaseContext(), "Falha configureSocket: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-			}
+			}catch(IOException e){}
 		}
 	}
     
@@ -150,41 +121,9 @@ public class Main extends Activity {
 		byte[] msgBuffer = message.getBytes();
 		try{
 			outStream.write(msgBuffer);
-		}catch(IOException e){			
-			String msg = "Durante a escrita da mensagem: " + e.getMessage();
-			if (address.equals("00:00:00:00:00:00")) {
-				msg = msg + ".\n\nUpdate your server address from 00:00:00:00:00:00 to the correct address on line 35 in the java code";
-				msg = msg + ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + "exists on server.\n\n";
-				Toast.makeText(getBaseContext(), "Mensagem do Sistema: " + msg, Toast.LENGTH_SHORT).show();
-			}
-		}catch(Exception e1){
-			Toast.makeText(getBaseContext(), "Mensagem: " + message + " - Enviado" + e1.getMessage(), Toast.LENGTH_SHORT).show();
-		}
+		}catch(IOException e){}
+		catch(Exception e1){}
 	}  
-    
-    private void updateImage(int progress){
-    	if (progress == 0){
-    		imgLight.setImageResource(R.drawable.lamp_0);
-    	}else if (progress == 1){
-    		imgLight.setImageResource(R.drawable.lamp_1);
-    	}else if (progress == 2){
-    		imgLight.setImageResource(R.drawable.lamp_2);
-    	}else if (progress == 3){
-    		imgLight.setImageResource(R.drawable.lamp_3);
-    	}else if (progress == 4){
-    		imgLight.setImageResource(R.drawable.lamp_4);
-    	}else if (progress == 5){
-    		imgLight.setImageResource(R.drawable.lamp_5);
-    	}else if (progress == 6){
-    		imgLight.setImageResource(R.drawable.lamp_6);
-    	}else if (progress == 7){
-    		imgLight.setImageResource(R.drawable.lamp_7);
-    	}else if (progress == 8){
-    		imgLight.setImageResource(R.drawable.lamp_8);
-    	}else if (progress == 9){
-    		imgLight.setImageResource(R.drawable.lamp_9);
-    	}
-    }
     
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -218,5 +157,4 @@ public class Main extends Activity {
 		}catch (Exception e){}
 		super.onDestroy();
 	}
-	
 }

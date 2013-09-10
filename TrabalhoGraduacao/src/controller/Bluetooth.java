@@ -1,4 +1,4 @@
-package dm.trabalhograduacao;
+package controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -86,16 +86,4 @@ public class Bluetooth extends Activity {
 		}catch(Exception e1){
 		}
 	}
-    
-    public Runnable run(){
-		while (!btSocket.isConnected()){
-			try{
-				btAdapter = BluetoothAdapter.getDefaultAdapter();
-				checkBluetoothState();
-				configureSocketAndStream();
-			}catch (Exception e){}
-		}
-		return null;
-	}
-    
 }
