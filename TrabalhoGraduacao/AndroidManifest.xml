@@ -15,7 +15,6 @@
             android:name="view.Core"
             android:label="@string/title_activity_main" 
             android:screenOrientation="portrait" >
-            <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" > -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +22,8 @@
             </intent-filter>
         </activity>
     </application>
- 	<uses-permission android:name = "android.permission.BLUETOOTH" />
+
+    <uses-permission android:name = "android.permission.BLUETOOTH" />
     <uses-permission android:name = "android.permission.BLUETOOTH_ADMIN" />
     
 </manifest>
