@@ -1,31 +1,25 @@
 package view;
 
+import dm.trabalhograduacao.R;
 import android.app.Activity;
 import android.os.Bundle;
-import android.test.suitebuilder.annotation.Suppress;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import dm.trabalhograduacao.R;
 
-public class User extends Activity{
+public class Login extends Activity{
 	
-
+	@SuppressWarnings("unused")
 	private EditText user;
+	@SuppressWarnings("unused")
 	private EditText password;
-	private EditText retryPassword;
-	private Button btnSign;
-	private RadioGroup rdgType;
-	private RadioButton rbNormalType;
-	private RadioButton rbManagerType;
-	
-	
+	@SuppressWarnings("unused")
+	private Button btnEntry;
+		
 	@Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user);
+        setContentView(R.layout.login);
 	
         try{        
         	initObjects();
@@ -33,12 +27,11 @@ public class User extends Activity{
 	}
 
 	private void initObjects(){
-		user = (EditText) findViewById(R.id.txtUserRegister);
-		password = (EditText) findViewById(R.id.txtPasswordRegister);
-		rdgType = (RadioGroup) findViewById(R.id.rdgType);
-		rbNormalType = (RadioButton) findViewById(R.id.rdNormalType);
-		rbManagerType = (RadioButton) findViewById(R.id.rdManagerType);
+		user = (EditText) findViewById(R.id.txtUser);
+		password = (EditText) findViewById(R.id.txtPassword);
+		btnEntry = (Button) findViewById(R.id.btnEntry);
 	}
+	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -67,6 +60,5 @@ public class User extends Activity{
 	
 	protected void onDestroy(){
 	}
-
-
+	
 }

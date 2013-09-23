@@ -12,7 +12,6 @@ import dm.trabalhograduacao.R;
 
 public class User extends Activity{
 	
-
 	private EditText user;
 	private EditText password;
 	private EditText retryPassword;

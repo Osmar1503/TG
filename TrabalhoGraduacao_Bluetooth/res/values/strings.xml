@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Trabalho de Graduacao</string>
+    <string name="app_name">TrabalhoGraduacao</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">About</string>
     <string name="title_activity_main">Trabalho de Graduação</string>
@@ -19,6 +19,6 @@
     <string name="btnSign">Cadastrar</string>
     <string name="functions">Funcionalidades</string>
     <string name="fatecImage">Logo da Fatec-SJC</string>
-	<string name="copyRight">Aluno:	Osmar Salles de Carvalho, 2013</string>
+	<string name="copyRight">Desenvolvido Por: Osmar Salles de Carvalho, 2013</string>
     
 </resources>

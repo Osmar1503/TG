@@ -2,43 +2,37 @@ package view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.test.suitebuilder.annotation.Suppress;
 import android.view.Menu;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ListView;
 import dm.trabalhograduacao.R;
 
-public class User extends Activity{
-	
+public class Tools extends Activity{
 
-	private EditText user;
-	private EditText password;
-	private EditText retryPassword;
-	private Button btnSign;
-	private RadioGroup rdgType;
-	private RadioButton rbNormalType;
-	private RadioButton rbManagerType;
-	
+	private ListView lstTools;
 	
 	@Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user);
-	
+        setContentView(R.layout.tools);
+        
         try{        
         	initObjects();
         }catch (Exception e){}
 	}
 
 	private void initObjects(){
-		user = (EditText) findViewById(R.id.txtUserRegister);
-		password = (EditText) findViewById(R.id.txtPasswordRegister);
-		rdgType = (RadioGroup) findViewById(R.id.rdgType);
-		rbNormalType = (RadioButton) findViewById(R.id.rdNormalType);
-		rbManagerType = (RadioButton) findViewById(R.id.rdManagerType);
+		lstTools = (ListView) findViewById(R.id.lstTools);
 	}
+	
+	public ListView getLstTools() {
+		return lstTools;
+	}
+
+	public void setLstTools(ListView lstTools) {
+		this.lstTools = lstTools;
+	}
+
+	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -67,6 +61,5 @@ public class User extends Activity{
 	
 	protected void onDestroy(){
 	}
-
-
+	
 }
