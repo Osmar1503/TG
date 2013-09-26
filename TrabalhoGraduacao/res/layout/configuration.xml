@@ -3,17 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white" >
-
-    <ProgressBar
-        android:id="@+id/pgbConfiguration"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="188dp"
-        android:scaleY="5" />
-
+    
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
@@ -21,8 +11,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:src="@drawable/fatec" 
-        android:contentDescription="@string/fatecImage"/>
+        android:contentDescription="@string/fatecImage"
+        android:src="@drawable/fatec" />
 
     <TextView
         android:id="@+id/textView1"
@@ -37,10 +27,19 @@
         android:id="@+id/txtState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/pgbConfiguration"
+        android:layout_above="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
+        android:layout_marginBottom="88dp"
         android:text="Teste"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <ProgressBar
+        android:id="@+id/pgbConfiguration"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtState"
+        android:layout_centerHorizontal="true"
+        android:scaleY="5" />
 
 </RelativeLayout>

@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.view.Menu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import controller.ProgressControl;
 import dao.DataBaseCreation;
 import dm.trabalhograduacao.R;
@@ -43,7 +42,6 @@ public class Configuration extends Activity {
 
 	private void startConfiguration() throws InterruptedException {
 		// Colocar no mesmo padrão de código
-		// Não encostar barra de status nas bordas da tela.
 		new Thread(new Runnable() {
 			public void run() {
 				configureDataBase();
@@ -86,7 +84,6 @@ public class Configuration extends Activity {
 	}
 
 	public void callLoginActivity() {
-		// Call Activity of Login
 		Intent intent = new Intent(Configuration.this, Login.class);
 		startActivityForResult(intent, 1);
 		finish();
