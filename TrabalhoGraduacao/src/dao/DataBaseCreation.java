@@ -16,7 +16,7 @@ public class DataBaseCreation {
 	public boolean createDataBase() throws InterruptedException {
 		for (int i = 0; i < 10000000; i++) {
 			progressControl.setProgress(10);
-			progressControl.setMessage("Estou aqui");	
+			progressControl.setMessage("Iniciando...");	
 		}
 		
 		return false;
@@ -25,20 +25,24 @@ public class DataBaseCreation {
 	public boolean createTables() throws InterruptedException {
 		for (int i = 0; i < 10000000; i++) {
 			progressControl.setProgress(20);
-			progressControl.setMessage("Estou aqui 1");	
+			progressControl.setMessage("20%");	
 		}
 		return false;
 	}
 
 	public boolean existDefaultUser() throws InterruptedException {
 		for (int i = 0; i < 10000000; i++) {
-			progressControl.setProgress(100);
-			progressControl.setMessage("Estou aqui 2");	
+			progressControl.setProgress(50);
+			progressControl.setMessage("50%");	
 		}
 		return false;
 	}
 
 	public boolean insertInitUser() throws InterruptedException {
+		for (int i = 0; i < 10000000; i++) {
+			progressControl.setProgress(70);
+			progressControl.setMessage("70%");	
+		}
 		return false;
 	}
 
@@ -47,6 +51,10 @@ public class DataBaseCreation {
 	}
 	
 	public boolean insertInitTool() throws InterruptedException {
+		for (int i = 0; i < 10000000; i++) {
+			progressControl.setProgress(100);
+			progressControl.setMessage("Finalizado");	
+		}
 		return false;
 	}
 
