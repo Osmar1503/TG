@@ -57,11 +57,20 @@
 
     <Button
         android:id="@+id/btnEntry"
-        android:layout_width="fill_parent"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="81dp"
+        android:text="@string/btnEntry" />
+
+    <TextView
+        android:id="@+id/lblResponse"
+        android:textColor="#FF0000"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txtPassword"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="@string/btnEntry" />
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     
 </RelativeLayout>

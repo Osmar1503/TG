@@ -37,24 +37,11 @@ public class Core extends Activity {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
         try{
 	        initObjects();
 	        checkBTState();
 	        configureSocketAndStream();
         }catch (Exception e){}
-        
-        imgLight.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				if (imgClicked){
-					sendData("0");
-					imgClicked = false ;
-				}else{
-					sendData("9");
-					imgClicked = true ;
-				}
-			}
-		});
     }
 
     private void initObjects() throws Exception{
@@ -62,10 +49,29 @@ public class Core extends Activity {
 	    	imgLight = (ImageView) findViewById(R.id.imgLight);
 	    	findViewById(R.id.imgLight).setKeepScreenOn(true);
 	    	btAdapter = BluetoothAdapter.getDefaultAdapter();
+	    	
+	    	imgLight.setOnClickListener(new OnClickListener() {
+	 			public void onClick(View v) {
+	 				if (imgClicked){
+	 					sendData("0");
+	 					imgClicked = false ;
+	 				}else{
+	 					sendData("9");
+	 					imgClicked = true ;
+	 				}
+	 				alterImage(imgClicked);
+	 			}
+	 		});
+	    	
     	}catch (Exception e){
     		Toast.makeText(getBaseContext(), "Falha ao Inicializar os Objetos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     	}
 	}
+
+    private void alterImage(boolean status){
+    	if(status) imgLight.setImageResource(R.drawable.lamp_9); 
+    	else imgLight.setImageResource(R.drawable.lamp_0);;
+    }
     
     private void checkBTState() throws Exception{
     	try{
@@ -76,7 +82,6 @@ public class Core extends Activity {
 			if (!btAdapter.isEnabled()){
 				Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 				startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-				Toast.makeText(getBaseContext(), "Tudo certo com o estado do Bluetooth: ", Toast.LENGTH_SHORT).show();
 			}
     	}catch(Exception e){
     		Toast.makeText(getBaseContext(), "Falha no checar estado do bluetooth: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -157,4 +162,5 @@ public class Core extends Activity {
 		}catch (Exception e){}
 		super.onDestroy();
 	}
+
 }

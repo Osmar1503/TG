@@ -41,7 +41,6 @@ public class Configuration extends Activity {
 	}
 
 	private void startConfiguration() throws InterruptedException {
-		// Colocar no mesmo padrão de código
 		new Thread(new Runnable() {
 			public void run() {
 				configureDataBase();

@@ -1,20 +1,22 @@
 package view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 import controller.Logon;
 import dm.trabalhograduacao.R;
 
 public class Login extends Activity{
 	
-	private EditText user;
-	private EditText password;
+	private EditText txtUser;
+	private EditText txtPassword;
+	private TextView lblResponse;
 	private Button btnEntry;
 	private boolean permission;
 		
@@ -29,53 +31,59 @@ public class Login extends Activity{
 	private void applyButtonFunction(){
 		btnEntry.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				Logon logon = new Logon();
-				permission = logon.validateLogin(String.valueOf(user.getText()), String.valueOf(password.getText()));
-				printMessage();
+				if (ValidateFields()){
+					Logon logon = new Logon();
+					permission = logon.validateLogin(String.valueOf(txtUser.getText()), String.valueOf(txtPassword.getText()));
+					if (permission){
+						callCoreActivity();
+					}else{
+						printMessage("Entrada não permitida. Tente novamente.");
+						clearValues();
+					}
+				}
 			}
 		});
 	}
 	
 	private void initObjects(){
-		user = (EditText) findViewById(R.id.txtUser);
-		password = (EditText) findViewById(R.id.txtPassword);
+		txtUser = (EditText) findViewById(R.id.txtUser);
+		txtPassword = (EditText) findViewById(R.id.txtPassword);
+		lblResponse = (TextView) findViewById(R.id.lblResponse);
 		btnEntry = (Button) findViewById(R.id.btnEntry);
 		permission = false;
 	}
 	
-	private void printMessage(){
-		if (!permission){
-			Toast.makeText(getBaseContext(), "Entrada não permitida. Tente novamente.", Toast.LENGTH_SHORT).show();
+	private void printMessage(String message){
+		lblResponse.setText(message);
+	}
+	
+	private boolean ValidateFields(){
+		if(String.valueOf(txtUser.getText()).equals("")){
+			printMessage("Informe seu nome de Usuário.");
+			return false;
 		}
+		if(String.valueOf(txtPassword.getText()).equals("")) {
+			printMessage("Informe sua Senha.");
+			return false;
+		}
+		return true;
+	}
+	
+	private void callCoreActivity(){
+		Intent intent = new Intent(Login.this, Core.class);
+		startActivityForResult(intent, 1);
+		finish();
+	}
+	
+	private void clearValues(){
+		txtPassword.setText("");
+		txtUser.setText("");
+		txtUser.requestFocus();
 	}
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-	
-	protected void onResume(){
-		super.onResume();
-	}
-	
-	protected void onStart(){
-		super.onStart();
-	}
-	
-	protected void onStop(){
-		super.onStop();
-	}
-	
-	protected void onPause(){
-		super.onPause();
-	}
-	
-	protected void onRestart(){
-		super.onRestart();
-	}
-	
-	protected void onDestroy(){
-	}
-	
+    }	
 }

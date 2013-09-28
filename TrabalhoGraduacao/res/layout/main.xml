@@ -8,9 +8,10 @@
         android:id="@+id/imgLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="123dp"
-        android:src="@drawable/lamp_0"
-        android:contentDescription="@string/imgLight" />
+        android:layout_marginTop="137dp"
+        android:contentDescription="@string/imgLight"
+        android:src="@drawable/lamp_0" />
     
 </RelativeLayout>
