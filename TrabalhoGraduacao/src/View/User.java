@@ -2,7 +2,6 @@ package view;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.test.suitebuilder.annotation.Suppress;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,12 +12,19 @@ import dm.trabalhograduacao.R;
 public class User extends Activity{
 	
 
+	@SuppressWarnings("unused")
 	private EditText user;
+	@SuppressWarnings("unused")
 	private EditText password;
+	@SuppressWarnings("unused")
 	private EditText retryPassword;
+	@SuppressWarnings("unused")
 	private Button btnSign;
+	@SuppressWarnings("unused")
 	private RadioGroup rdgType;
+	@SuppressWarnings("unused")
 	private RadioButton rbNormalType;
+	@SuppressWarnings("unused")
 	private RadioButton rbManagerType;
 	
 	
@@ -26,7 +32,6 @@ public class User extends Activity{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user);
-	
         try{        
         	initObjects();
         }catch (Exception e){}
@@ -44,29 +49,5 @@ public class User extends Activity{
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-	
-	protected void onResume(){
-		super.onResume();
-	}
-	
-	protected void onStart(){
-		super.onStart();
-	}
-	
-	protected void onStop(){
-		super.onStop();
-	}
-	
-	protected void onPause(){
-		super.onPause();
-	}
-	
-	protected void onRestart(){
-		super.onRestart();
-	}
-	
-	protected void onDestroy(){
-	}
-
 
 }

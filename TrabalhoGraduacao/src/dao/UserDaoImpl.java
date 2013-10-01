@@ -19,5 +19,18 @@ public class UserDaoImpl implements UserDao{
 	public User search(int id) {
 		return null;
 	}
+	
+	
+//	   private final DBHelper helper;
+//
+//	    public FuncionarioDAO(DBHelper helper) {
+//	        this.helper = helper;
+//	    }
+//
+//	    public void insere(Funcionario funcionario) {
+//	        helper.getWritableDatabase().insert(...);
+//	    }
+	
+	
 
 }

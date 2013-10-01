@@ -7,8 +7,9 @@ public class  Logon{
 	
 	public boolean validateLogin (String user, String password){
 		Random random = new Random();
-        boolean result = random.nextBoolean();
-        return result;
+        @SuppressWarnings("unused")
+		boolean result = random.nextBoolean();
+        return false;
 	}
 	
 	public void logout(){}
