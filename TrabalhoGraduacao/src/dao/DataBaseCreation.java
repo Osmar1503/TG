@@ -46,7 +46,6 @@ public class DataBaseCreation extends SQLiteOpenHelper{
 
 	public long InserirContato(String nome, String telefone, String endereco){
 		SQLiteDatabase db = getReadableDatabase();
-		
 		try
 		{
 			ContentValues initialValues = new ContentValues();

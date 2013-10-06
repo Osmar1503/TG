@@ -33,7 +33,7 @@ public class Login extends Activity{
 			public void onClick(View v) {
 				if (ValidateFields()){
 					Logon logon = new Logon();
-					permission = logon.validateLogin(String.valueOf(txtUser.getText()), String.valueOf(txtPassword.getText()));
+					permission = logon.validateLogin(String.valueOf(txtUser.getText()), String.valueOf(txtPassword.getText()), getBaseContext());
 					if (permission){
 						callCoreActivity();
 					}else{

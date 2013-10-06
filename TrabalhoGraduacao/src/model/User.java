@@ -6,7 +6,24 @@ public class User {
 	private String user;
 	private String password;
 	private String email;
+	private int permission;
 	
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public int getPermission() {
+		return permission;
+	}
+
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+
 	public void setUser(String user) {
 		this.user = user;
 	}

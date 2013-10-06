@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import model.User;
 
 public interface UserDao {
@@ -7,5 +9,6 @@ public interface UserDao {
 	public boolean add(User user);
 	public boolean remove (User user);
 	public boolean update(User user);
-	public User search(int userId); 
+	public List<User> listUser();
+	public boolean search(String userName, String password); 
 }

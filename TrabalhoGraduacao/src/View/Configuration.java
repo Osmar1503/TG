@@ -9,7 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import controller.ProgressControl;
 import dao.DataBaseCreation;
+import dao.UserDaoImpl;
 import dm.trabalhograduacao.R;
+import factory.ConnectionFactory;
 
 public class Configuration extends Activity {
 	private ProgressBar pgbConfiguration;
@@ -43,34 +45,32 @@ public class Configuration extends Activity {
 	private void startConfiguration() throws InterruptedException {
 		new Thread(new Runnable() {
 			public void run() {
-//				configureDataBase();
-				dbCreation = new DataBaseCreation(getBaseContext(), progressControl);
-//				dbCreation.InserirContato("Daniema", "12", "Rua 1");
+				ConnectionFactory con = new ConnectionFactory(getBaseContext());
+				
 				try {
 					Log.d("daniema", "Parado");
 					Thread.sleep(2000);
 					Log.d("daniema", "Contiuando");
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
-				dbCreation.obterValores();
+				model.User user =  new model.User();
+				UserDaoImpl userDao = new UserDaoImpl(getBaseContext());
+				
+				user.setUser("Paixao");
+				user.setPassword("1503");
+				user.setEmail("osmar_salles@hotmail.com");
+				user.setPermission(1);
+				
+//				userDao.add(user);
+				userDao.listUser();
+				
 				callLoginActivity();
 			}
 		}).start();
 
 		updateProgressBar();
-	}
-
-	public void configureDataBase() {
-		try {
-//			dbCreation.createTables();
-//			dbCreation.existAdminUser();
-//			dbCreation.insertInitUser();
-//			dbCreation.existDefaultTool();
-//			dbCreation.insertInitTool();
-		} catch (Exception e) {}
 	}
 
 	public void updateProgressBar() {
