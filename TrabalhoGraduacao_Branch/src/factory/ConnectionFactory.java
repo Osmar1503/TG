@@ -3,7 +3,6 @@ package factory;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import controller.Message;
 import controller.ProgressControl;
 
@@ -51,16 +50,19 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 				" USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, USER_NAME TEXT NOT NULL, " +
 				" PASSWORD TEXT NOT NULL, EMAIL TEXT, PERMISSION INTEGER);";
 		
-//		String toolTable = "CREATE TABLE TOOL (TOOL_ID INTEGER PRIMARY KEY AUTOINCREMENT, ACTION INTEGER, DESCRIPTION TEXT, Endereco TEXT)";
-//		String logTable = "CREATE TABLE LOG (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nome TEXT, Telefone TEXT, Endereco TEXT)";
+		String toolTable = "CREATE TABLE TOOL (" +
+				" TOOL_ID INTEGER PRIMARY KEY AUTOINCREMENT, ACTION INTEGER, DESCRIPTION TEXT)";
+
+		//		String logTable = "CREATE TABLE LOG (ID INTEGER PRIMARY KEY AUTOINCREMENT, Nome TEXT, Telefone TEXT, Endereco TEXT)";
 		
 		db.beginTransaction();
 		try{
-			message.writeLogCat("Criando Tabela USER");
 			ExecutarComandosSQL(db, userTable);
 			message.writeLogCat("Tabela USER criada.");
-//			ExecutarComandosSQL(db, toolTable);
-//			Log.d("daniema", "Tabela TOOL criada.");
+			
+			ExecutarComandosSQL(db, toolTable);
+			message.writeLogCat("Tabela TOOL criada.");
+			
 //			ExecutarComandosSQL(db, logTable);
 //			Log.d("daniema", "Tabela LOG criada.");
 			db.setTransactionSuccessful();
@@ -81,8 +83,10 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 		try{
 			ExecutarComandosSQL(db, userTable);
 			message.writeLogCat("Tabela User removida ");
+			
 			ExecutarComandosSQL(db, toolTable);
 			message.writeLogCat("Tabela tool removida ");
+			
 			ExecutarComandosSQL(db, logTable);
 			message.writeLogCat("Tabela log removida ");
 		}catch(Exception e){
