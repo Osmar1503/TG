@@ -1,0 +1,24 @@
+<resources>
+
+    <string name="app_name">Trabalho de Graduacao</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">About</string>
+    <string name="title_activity_main">Trabalho de Graduação</string>
+    <string name="about">Sobre</string>
+    <string name="textAbout">Trabalho de graduação desenvolvido pelo aluno Osmar Salles de Carvalho de R.A. 000 000 000, pela Faculdade de Tecnologia de São José dos Campos FATEC-SJC, SP, Brasil.</string>
+    <string name="login">Login</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="retryPassword">Repetir Senha</string>
+    <string name="btnEntry">Entrar</string>
+    <string name="imgLight">Lâmpada que acende e apaga.</string>
+    <string name="userRegister">Cadastro de Usuário</string>
+    <string name="userTypeTitle">Tipo</string>
+    <string name="userNormalType">Normal</string>
+    <string name="userManagerType">Administrador</string>
+    <string name="btnSign">Cadastrar</string>
+    <string name="functions">Funcionalidades</string>
+    <string name="fatecImage">Logo da Fatec-SJC</string>
+	<string name="copyRight">Aluno:	Osmar Salles de Carvalho, 2013</string>
+    
+</resources>
