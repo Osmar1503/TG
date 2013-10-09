@@ -10,5 +10,5 @@ public interface UserDao {
 	public boolean remove (User user);
 	public boolean update(User user);
 	public List<User> listUser();
-	public boolean search(String userName, String password); 
+	public boolean search(String userName, String password);
 }

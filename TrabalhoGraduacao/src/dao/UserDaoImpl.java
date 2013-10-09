@@ -7,11 +7,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import controller.Message;
 import factory.ConnectionFactory;
 
 public class UserDaoImpl implements UserDao{
 	private ConnectionFactory conn = null;
+	private Message message = new Message();
 	
 	public UserDaoImpl(Context context){
 		conn = new ConnectionFactory(context);
@@ -27,11 +28,11 @@ public class UserDaoImpl implements UserDao{
 			initialValues.put("PERMISSION", user.getPermission());
 			db.insert("USER", null, initialValues);
 			
-			Log.d("daniema", "Usuario: " + user.getUser() + " Inserido com sucesso.");			
+			message.writeLogCat("Usuario: " + user.getUser() + " Inserido com sucesso.");			
 			return true;
 			
 		}catch (Exception e) {
-			Log.d("daniema", "Falha ao Inserir Usuario: " + user.getUser());
+			message.writeLogCat("Falha ao Inserir Usuario: " + user.getUser());
 			return false;
 		}
 		finally
@@ -54,86 +55,76 @@ public class UserDaoImpl implements UserDao{
 	
 	public List<User> listUser(){
 		if (conn.getWritableDatabase().isOpen()){
-		Log.d("daniema", "Conexao aberta");
-		SQLiteDatabase db = conn.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select * from USER", null);
-		try{
-//			" USER_ID INTEGER PRIMARY KEY AUTOINCREMENT, USER_NAME TEXT NOT NULL, " +
-//			" PASSWORD TEXT NOT NULL, EMAIL TEXT, PERMISSION INTEGER);";
+			message.writeLogCat("Conexao aberta");
 			
-			if (cursor.getCount() > 0){
-				while (cursor.moveToNext()) {
-					printSpace();
-					
-					try{
-						Log.d("daniema", "ID: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("USER_ID")).toString())));  
-					}catch(Exception e){
-						Log.d("daniema", "Não foi possivel obter ID...");
-        			}
-
-					try{
-						Log.d("daniema", "Nome: " + cursor.getString(cursor.getColumnIndex("USER_NAME")));
-					}catch(Exception e){
-						Log.d("daniema", "Não foi possivel obter Nome...");	
-	        		}
-					
-					try{
-						Log.d("daniema", "Senha: " + cursor.getString(cursor.getColumnIndex("PASSWORD")));
-					}catch(Exception e){
-						Log.d("daniema", "Não foi possivel obter Senha...");
-        			}
-					
-					try{
-						Log.d("daniema", "Email: " + cursor.getString(cursor.getColumnIndex("EMAIL")));
-					}catch(Exception e){
-						Log.d("daniema", "Não foi possivel obter Email...");
-        			}
-					
-					try{
-						Log.d("daniema", "Permissão: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("PERMISSION")))));
-					}catch(Exception e){
-						Log.d("daniema", "Não foi possivel obter Permissao...");
-        			}
-					
-		        }                 
-			}
-			cursor.close();
-        }catch(Exception e){
-        	Log.d("daniema", "Falha ao obter valores: " + e.getMessage());
-        }
-	}else{
-		Log.d("daniema", "Conexao não está aberta");
-	}
-
-		return null;
-	}
-
-	private void printSpace(){
-		Log.d("daniema", " ");
-		Log.d("daniema", "----------------------------------------------------------");
-		Log.d("daniema", " ");
-	}
+			SQLiteDatabase db = conn.getWritableDatabase();
+			Cursor cursor = db.rawQuery("select * from USER", null);
+			try{
+				if (cursor.getCount() > 0){
+					while (cursor.moveToNext()) {
+						message.printSpace();
+						
+						try{
+							message.writeLogCat("ID: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("USER_ID")).toString())));  
+						}catch(Exception e){
+							message.writeLogCat("Não foi possivel obter ID...");
+	        			}
 	
-	private void escreve(String msg){
-		Log.d("daniema", msg);
+						try{
+							message.writeLogCat("Nome: " + cursor.getString(cursor.getColumnIndex("USER_NAME")));
+						}catch(Exception e){
+							message.writeLogCat("Não foi possivel obter Nome...");	
+		        		}
+						
+						try{
+							message.writeLogCat("Senha: " + cursor.getString(cursor.getColumnIndex("PASSWORD")));
+						}catch(Exception e){
+							message.writeLogCat("Não foi possivel obter Senha...");
+	        			}
+						
+						try{
+							message.writeLogCat("Email: " + cursor.getString(cursor.getColumnIndex("EMAIL")));
+						}catch(Exception e){
+							message.writeLogCat("Não foi possivel obter Email...");
+	        			}
+						
+						try{
+							message.writeLogCat("Permissão: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("PERMISSION")))));
+						}catch(Exception e){
+							message.writeLogCat("Não foi possivel obter Permissao...");
+	        			}
+						
+			        }                 
+				}
+				cursor.close();
+	        }catch(Exception e){
+	        	message.writeLogCat("Falha ao obter valores: " + e.getMessage());
+	        }
+		}else{
+			message.writeLogCat("Conexao não está aberta");
+		}
+	
+			return null;
 	}
 
 	public boolean search(String userName, String password) {
 		if (conn.getWritableDatabase().isOpen()){
-			escreve("conexao aberta no search.");
+			message.writeLogCat("conexao aberta no search.");
+			
 			SQLiteDatabase db = conn.getWritableDatabase();
 			Cursor cursor = db.rawQuery("select * from USER WHERE USER_NAME = ? AND PASSWORD = ?", new String[]{userName, password});
-			escreve("comando select escrito");
+			
+			message.writeLogCat("comando select escrito");
 			try{
 				if (cursor.getCount() > 0){
-					escreve("contem registro");
+					message.writeLogCat("contem registro");
 					return true;
 				}else{
-					escreve("não existe registro");
+					message.writeLogCat("não existe registro");
 					return false;
 				}
 			}catch(Exception e){
-				Log.d("daniema", "Não foi possível verificar usuario");
+				message.writeLogCat("Não foi possível verificar usuario");
 				return false;
 			}
 		}else{

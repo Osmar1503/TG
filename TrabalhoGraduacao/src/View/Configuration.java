@@ -1,6 +1,8 @@
 package view;
 
+import model.Action;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import controller.ProgressControl;
 import dao.DataBaseCreation;
+import dao.ToolDaoImpl;
 import dao.UserDaoImpl;
 import dm.trabalhograduacao.R;
 import factory.ConnectionFactory;
@@ -18,6 +21,7 @@ public class Configuration extends Activity {
 	private ProgressControl progressControl;
 	private TextView txtStatus;
 	private int progress;
+	private Context context;
 	DataBaseCreation dbCreation;
 	
 	@Override
@@ -39,7 +43,7 @@ public class Configuration extends Activity {
 		pgbConfiguration.setMax(100);
 		progress = 0;
 		progressControl = new ProgressControl();
-		
+		context = getBaseContext();
 	}
 
 	private void startConfiguration() throws InterruptedException {
@@ -47,16 +51,8 @@ public class Configuration extends Activity {
 			public void run() {
 				ConnectionFactory con = new ConnectionFactory(getBaseContext());
 				
-				try {
-					Log.d("daniema", "Parado");
-					Thread.sleep(2000);
-					Log.d("daniema", "Contiuando");
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				
 				model.User user =  new model.User();
-				UserDaoImpl userDao = new UserDaoImpl(getBaseContext());
+				UserDaoImpl userDao = new UserDaoImpl(context);
 				
 				user.setUser("Paixao");
 				user.setPassword("1503");
@@ -65,6 +61,15 @@ public class Configuration extends Activity {
 				
 //				userDao.add(user);
 				userDao.listUser();
+				
+				model.Tool tool = new model.Tool();
+				ToolDaoImpl toolDao = new ToolDaoImpl(getBaseContext());
+				
+				tool.setDescription("Acender Lampada");
+				tool.setType(Action.TURN_ON_LAMP);
+				
+//				toolDao.add(tool);
+				toolDao.listTool();
 				
 				callLoginActivity();
 			}
