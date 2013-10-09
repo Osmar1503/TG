@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import model.Tool;
@@ -24,13 +25,10 @@ public class ToolDaoImpl implements ToolDao{
 		try	{
 			ContentValues initialValues = new ContentValues();
 			
-			message.writeLogCat("Tipo da ferramenta - " + String.valueOf(tool.getType()));
-			
 			initialValues.put("ACTION", String.valueOf((tool.getType())));
 			initialValues.put("DESCRIPTION", tool.getDescription());
 			db.insert("TOOL", null, initialValues);
 			
-			message.writeLogCat("Ferramenta: " + tool.getDescription() + " Inserido com sucesso.");			
 			return true;
 		}catch (Exception e) {
 			message.writeLogCat("Falha ao Inserir Ferramenta: " + tool.getDescription());
@@ -49,43 +47,26 @@ public class ToolDaoImpl implements ToolDao{
 	public Tool search(int toolId) {return null;}
 
 	public List<Tool> listTool() {
+		List<Tool> toolList = new LinkedList<Tool>();
+		
 		if (conn.getWritableDatabase().isOpen()){
-			message.writeLogCat("Conexao aberta");
-			
 			SQLiteDatabase db = conn.getReadableDatabase();
-			
-			message.writeLogCat("Gerou conexao getWritableDataBase");
-			Cursor cursor = null;
-			try{
-				cursor = db.rawQuery("select * from TOOL", null);
-			
-				message.writeLogCat("Cursor com select criado");
-			}catch(Exception e){
-				message.writeLogCat("Err: " + e.getMessage());
-			}
-			
+			Cursor cursor = db.rawQuery("select * from TOOL", null);
 			try{
 				if (cursor.getCount() > 0){
 					while (cursor.moveToNext()) {
+						Tool tool = new Tool();
+						
+						tool.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("TOOL_ID"))));
+						tool.setDescription(cursor.getString(cursor.getColumnIndex("DESCRIPTION")));
+						tool.setType(cursor.getString(cursor.getColumnIndex("ACTION")));
+						
+						toolList.add(tool);
+						
 						message.printSpace();
-						
-						try{
-							message.writeLogCat( "Tool ID: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("TOOL_ID")).toString())));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Tool ID...");
-	        			}
-	
-						try{
-							message.writeLogCat("Action: " + cursor.getString(cursor.getColumnIndex("ACTION")));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Action...");	
-		        		}
-						
-						try{
-							message.writeLogCat("Descrição: " + cursor.getString(cursor.getColumnIndex("DESCRIPTION")));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Descrição...");
-	        			}
+						message.writeLogCat( "Tool ID: " + tool.getId());
+						message.writeLogCat("Action: " + tool.getType());
+						message.writeLogCat("Descrição: " + tool.getDescription());
 			        }                 
 				}else{
 					message.writeLogCat("Não Existem registros");
@@ -94,11 +75,7 @@ public class ToolDaoImpl implements ToolDao{
 	        }catch(Exception e){
 	        	message.writeLogCat("Falha ao obter valores: " + e.getMessage());
 	        }
-		}else{
-			message.writeLogCat("Conexao não está aberta");
 		}
-	
-			return null;
+		return toolList;
 	}
-
 }

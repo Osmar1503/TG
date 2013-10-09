@@ -9,20 +9,16 @@ import controller.ProgressControl;
 
 public class ConnectionFactory extends SQLiteOpenHelper{
 	private static final String DATABASE_NAME = "fatec";
-	private static final int VERSION = 2;
-	private final Context context;
+	private static final int VERSION = 1;
 	private ProgressControl progressControl;
 	private Message message = new Message();
 	
 	public ConnectionFactory(Context context){
 		super(context, DATABASE_NAME, null, VERSION);
-		this.context = context;
-		message.writeLogCat("Banco criado.");
 	}
 	
 	public ConnectionFactory(Context context, ProgressControl progressControl){
 		super(context, DATABASE_NAME, null, VERSION);
-		this.context = context;
 		this.progressControl = progressControl;
 		this.progressControl.setProgress(15);
 		message.writeLogCat("Banco de Dados: " + DATABASE_NAME + ", Versão: " + VERSION + " criado com sucesso.");
@@ -30,9 +26,7 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		message.writeLogCat("Iniciando processo de criação das tabelas.");
 		createTables(db);
-		message.writeLogCat("Criação das tabelas encerrada..");
 	}
 
 	private void ExecutarComandosSQL(SQLiteDatabase db, String sql){
@@ -58,25 +52,11 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 		db.beginTransaction();
 		try{
 			ExecutarComandosSQL(db, userTable);
-			message.writeLogCat("Tabela USER criada.");
-			
-			db.setTransactionSuccessful();
-			
-		}catch(Exception e){
-			message.writeLogCat("Erro ao criar a tabela User: " + e.getMessage());
-		}finally{
-			db.endTransaction();
-		}
-		
-		db.beginTransaction();
-		try{
 			ExecutarComandosSQL(db, toolTable);
-			message.writeLogCat("Tabela TOOL criada.");
 			
 			db.setTransactionSuccessful();
-			
 		}catch(Exception e){
-			message.writeLogCat("Erro ao criar a tabela Tool: " + e.getMessage());
+			message.writeLogCat("Erro ao criar tabela: " + e.getMessage());
 		}finally{
 			db.endTransaction();
 		}
@@ -89,20 +69,7 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 		db.beginTransaction();
 		try{
 			ExecutarComandosSQL(db, userTable);
-			message.writeLogCat("Tabela User removida ");
-		}catch(Exception e){
-			message.printSpace();
-			message.writeLogCat("Falha ao Remover a Tabela User: " + e.getMessage());
-			message.printSpace();
-		}finally{
-			db.endTransaction();
-		}
-		
-		
-		db.beginTransaction();
-		try{
 			ExecutarComandosSQL(db, toolTable);
-			message.writeLogCat("Tabela tool removida ");
 		}catch(Exception e){
 			message.printSpace();
 			message.writeLogCat("Falha ao Remover a Tabela Tool: " + e.getMessage());

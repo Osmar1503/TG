@@ -3,7 +3,7 @@ package model;
 public class Tool {
 	
 	private int id;
-	private Action type;
+	private String type;
 	private String description;
 	
 	public int getId() {
@@ -14,11 +14,11 @@ public class Tool {
 		this.id = id;
 	}
 	
-	public Action getType() {
+	public String getType() {
 		return type;
 	}
 	
-	public void setType(Action type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	

@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import controller.ProgressControl;
-import dao.DataBaseCreation;
 import dao.ToolDaoImpl;
 import dao.UserDaoImpl;
 import dm.trabalhograduacao.R;
@@ -22,7 +21,6 @@ public class Configuration extends Activity {
 	private TextView txtStatus;
 	private int progress;
 	private Context context;
-	DataBaseCreation dbCreation;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,22 +52,28 @@ public class Configuration extends Activity {
 				model.User user =  new model.User();
 				UserDaoImpl userDao = new UserDaoImpl(context);
 				
-				user.setUser("Paixao");
+				user.setUser("paixao");
 				user.setPassword("1503");
 				user.setEmail("osmar_salles@hotmail.com");
 				user.setPermission(1);
-				
 //				userDao.add(user);
+
 				userDao.listUser();
 				
 				model.Tool tool = new model.Tool();
 				ToolDaoImpl toolDao = new ToolDaoImpl(getBaseContext());
 				
 				tool.setDescription("Acender Lampada");
-				tool.setType(Action.TURN_ON_LAMP);
-				
+				tool.setType(String.valueOf(Action.TURN_ON_LAMP));
 //				toolDao.add(tool);
+				
+				tool.setDescription("Apagar Lampada");
+				tool.setType(String.valueOf(Action.TURN_OFF_LAMP));
+//				toolDao.add(tool);
+				
 				toolDao.listTool();
+				
+				con.close();
 				
 				callLoginActivity();
 			}

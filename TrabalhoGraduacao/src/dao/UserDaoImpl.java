@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import model.User;
@@ -27,8 +28,6 @@ public class UserDaoImpl implements UserDao{
 			initialValues.put("EMAIL", user.getEmail());
 			initialValues.put("PERMISSION", user.getPermission());
 			db.insert("USER", null, initialValues);
-			
-			message.writeLogCat("Usuario: " + user.getUser() + " Inserido com sucesso.");			
 			return true;
 			
 		}catch (Exception e) {
@@ -54,77 +53,51 @@ public class UserDaoImpl implements UserDao{
 	}
 	
 	public List<User> listUser(){
+		List<User> userList = new LinkedList<User>();
+		
 		if (conn.getWritableDatabase().isOpen()){
-			message.writeLogCat("Conexao aberta");
-			
 			SQLiteDatabase db = conn.getWritableDatabase();
 			Cursor cursor = db.rawQuery("select * from USER", null);
 			try{
 				if (cursor.getCount() > 0){
 					while (cursor.moveToNext()) {
-						message.printSpace();
+						User user = new User();
+
+						user.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("USER_ID"))));
+						user.setUser(cursor.getString(cursor.getColumnIndex("USER_NAME")));
+						user.setPassword(cursor.getString(cursor.getColumnIndex("PASSWORD")));
+						user.setEmail(cursor.getString(cursor.getColumnIndex("EMAIL")));
+						user.setPermission(Integer.parseInt(cursor.getString(cursor.getColumnIndex("PERMISSION"))));
 						
-						try{
-							message.writeLogCat("ID: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("USER_ID")).toString())));  
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter ID...");
-	        			}
-	
-						try{
-							message.writeLogCat("Nome: " + cursor.getString(cursor.getColumnIndex("USER_NAME")));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Nome...");	
-		        		}
+						userList.add(user);
 						
-						try{
-							message.writeLogCat("Senha: " + cursor.getString(cursor.getColumnIndex("PASSWORD")));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Senha...");
-	        			}
-						
-						try{
-							message.writeLogCat("Email: " + cursor.getString(cursor.getColumnIndex("EMAIL")));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Email...");
-	        			}
-						
-						try{
-							message.writeLogCat("Permissão: " + String.valueOf((int)Integer.parseInt(cursor.getString(cursor.getColumnIndex("PERMISSION")))));
-						}catch(Exception e){
-							message.writeLogCat("Não foi possivel obter Permissao...");
-	        			}
-						
+						message.printSpace();						
+						message.writeLogCat("ID: " + user.getId());  
+						message.writeLogCat("Nome: " + user.getUser());
+						message.writeLogCat("Senha: " + user.getPassword());
+						message.writeLogCat("Email: " + user.getEmail());
+						message.writeLogCat("Permissão: " + user.getPermission());
 			        }                 
 				}
 				cursor.close();
 	        }catch(Exception e){
 	        	message.writeLogCat("Falha ao obter valores: " + e.getMessage());
 	        }
-		}else{
-			message.writeLogCat("Conexao não está aberta");
 		}
-	
-			return null;
+		return userList;
 	}
 
 	public boolean search(String userName, String password) {
 		if (conn.getWritableDatabase().isOpen()){
-			message.writeLogCat("conexao aberta no search.");
-			
 			SQLiteDatabase db = conn.getWritableDatabase();
 			Cursor cursor = db.rawQuery("select * from USER WHERE USER_NAME = ? AND PASSWORD = ?", new String[]{userName, password});
-			
-			message.writeLogCat("comando select escrito");
 			try{
 				if (cursor.getCount() > 0){
-					message.writeLogCat("contem registro");
 					return true;
 				}else{
-					message.writeLogCat("não existe registro");
 					return false;
 				}
 			}catch(Exception e){
-				message.writeLogCat("Não foi possível verificar usuario");
 				return false;
 			}
 		}else{
@@ -132,5 +105,4 @@ public class UserDaoImpl implements UserDao{
 			return false;
 		}
 	}
-	
 }
