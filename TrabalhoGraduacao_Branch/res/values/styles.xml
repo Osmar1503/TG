@@ -1,6 +1,0 @@
-<resources>
-
-    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar" />
-    <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" > -->
-
-</resources>
