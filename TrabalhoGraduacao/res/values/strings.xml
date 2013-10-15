@@ -11,7 +11,13 @@
     <string name="password">Senha</string>
     <string name="retryPassword">Repetir Senha</string>
     <string name="btnEntry">Entrar</string>
-    <string name="imgLight">Lâmpada que acende e apaga.</string>
+    <string name="imgBluetooth">Estado da Conexão com Sistema</string>
+    <string name="imgMenuBorder">Borda do Menu</string>
+    <string name="imgMenuItemTool">Ferramentas</string>
+    <string name="imgMenuItemUser">Usuarios</string>
+    <string name="imgMenuItemHome">Menu Principal</string>
+    <string name="imgLight">Acender e apagar lâmpada</string>
+    <string name="imgOk">Botão de Confirmação do Login</string>
     <string name="userRegister">Cadastro de Usuário</string>
     <string name="userTypeTitle">Tipo</string>
     <string name="userNormalType">Normal</string>
@@ -20,5 +26,6 @@
     <string name="functions">Funcionalidades</string>
     <string name="fatecImage">Logo da Fatec-SJC</string>
 	<string name="copyRight">Aluno:	Osmar Salles de Carvalho, 2013</string>
+	<string name="loading">Aguarde</string>
     
 </resources>

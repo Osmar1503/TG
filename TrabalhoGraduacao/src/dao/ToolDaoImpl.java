@@ -68,8 +68,6 @@ public class ToolDaoImpl implements ToolDao{
 						message.writeLogCat("Action: " + tool.getType());
 						message.writeLogCat("Descrição: " + tool.getDescription());
 			        }                 
-				}else{
-					message.writeLogCat("Não Existem registros");
 				}
 				cursor.close();
 	        }catch(Exception e){

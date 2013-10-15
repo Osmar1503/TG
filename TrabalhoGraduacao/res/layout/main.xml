@@ -8,10 +8,69 @@
         android:id="@+id/imgLight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="137dp"
+        android:layout_centerVertical="true"
         android:contentDescription="@string/imgLight"
         android:src="@drawable/lamp_0" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/imgMenuBorder"
+        android:src="@drawable/menu" />
+
+    <ImageView
+        android:id="@+id/imgTool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/imgMenuItemTool"
+        android:scaleX="0.5"
+        android:scaleY="0.5"
+        android:translationY="5dp"
+        android:src="@drawable/ferramentas" />
+
+    <ImageView
+        android:id="@+id/imgHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/imgMenuItemHome"
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        android:translationX="10dp"
+        android:translationY="7dp"
+        android:src="@drawable/home" />
+
+    <ImageView
+        android:id="@+id/imgUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+		android:contentDescription="@string/imgMenuItemUser"
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        android:translationX="-5dp"
+        android:translationY="6dp"
+        android:src="@drawable/user" />
+
+    <ImageView
+        android:id="@+id/imgBluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imgUser"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/imgBluetooth"
+        android:scaleType="matrix"
+        android:scaleX="0.4"
+        android:scaleY="0.4"
+        android:src="@drawable/bluetooth_off" />
     
 </RelativeLayout>

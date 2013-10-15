@@ -4,12 +4,13 @@ import model.Action;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import controller.ProgressControl;
 import dao.ToolDaoImpl;
 import dao.UserDaoImpl;
 import dm.trabalhograduacao.R;
@@ -17,16 +18,16 @@ import factory.ConnectionFactory;
 
 public class Configuration extends Activity {
 	private ProgressBar pgbConfiguration;
-	private ProgressControl progressControl;
-	private TextView txtStatus;
-	private int progress;
 	private Context context;
+	private boolean endProcess = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.configuration);
-		
+
 		initObjects();
 		try {
 			startConfiguration();
@@ -37,69 +38,64 @@ public class Configuration extends Activity {
 
 	private void initObjects() {
 		pgbConfiguration = (ProgressBar) findViewById(R.id.pgbConfiguration);
-		txtStatus = (TextView) findViewById(R.id.txtState);
-		pgbConfiguration.setMax(100);
-		progress = 0;
-		progressControl = new ProgressControl();
+		pgbConfiguration.getIndeterminateDrawable().setColorFilter(Color.rgb(0, 255, 255), android.graphics.PorterDuff.Mode.MULTIPLY);
 		context = getBaseContext();
 	}
 
 	private void startConfiguration() throws InterruptedException {
+		updateProgressBar();
+		
 		new Thread(new Runnable() {
 			public void run() {
-				ConnectionFactory con = new ConnectionFactory(getBaseContext());
-				
-				model.User user =  new model.User();
-				UserDaoImpl userDao = new UserDaoImpl(context);
-				
-				user.setUser("paixao");
-				user.setPassword("1503");
-				user.setEmail("osmar_salles@hotmail.com");
-				user.setPermission(1);
-//				userDao.add(user);
+				ConnectionFactory con = new ConnectionFactory(context);
 
+				UserDaoImpl userDao = new UserDaoImpl(context);
+				userDao.addDefaultUser();
 				userDao.listUser();
 				
+				timeToRead();
+				
 				model.Tool tool = new model.Tool();
-				ToolDaoImpl toolDao = new ToolDaoImpl(getBaseContext());
+				ToolDaoImpl toolDao = new ToolDaoImpl(context);
 				
 				tool.setDescription("Acender Lampada");
 				tool.setType(String.valueOf(Action.TURN_ON_LAMP));
-//				toolDao.add(tool);
+				toolDao.add(tool);
+				
+				timeToRead();
 				
 				tool.setDescription("Apagar Lampada");
 				tool.setType(String.valueOf(Action.TURN_OFF_LAMP));
-//				toolDao.add(tool);
+				toolDao.add(tool);
 				
 				toolDao.listTool();
 				
+				timeToRead();
+				
 				con.close();
 				
+				endProcess = true;
 				callLoginActivity();
 			}
 		}).start();
-
-		updateProgressBar();
 	}
-
+	
 	public void updateProgressBar() {
 		 new Thread(new Runnable() {
-		 public void run() {
-			 while (progress < 100) {
-				try {
-					Thread.sleep(100);
-				} catch (Exception e) {}
-					pgbConfiguration.post(new Runnable() {
-						public void run() {
-							pgbConfiguration.setProgress(progressControl.getProgress());
-							if (progress <= 100) txtStatus.setText(progressControl.getProgress() + "%");
-						}
-					});
-			 	}
+			 public void run() {
+				 while (!endProcess) {}
 			 }
 		 }).start();
 	}
 
+	private void timeToRead(){
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void callLoginActivity() {
 		Intent intent = new Intent(Configuration.this, Login.class);
 		startActivityForResult(intent, 1);

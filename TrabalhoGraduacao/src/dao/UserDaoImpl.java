@@ -40,6 +40,27 @@ public class UserDaoImpl implements UserDao{
 		}
 	}
 
+	public boolean addDefaultUser(){
+		SQLiteDatabase db = conn.getReadableDatabase();
+		try	{
+			ContentValues initialValues = new ContentValues();
+			initialValues.put("USER_NAME", "admin");
+			initialValues.put("PASSWORD", "1503");
+			initialValues.put("EMAIL", "suporte@dm.com.br");
+			initialValues.put("PERMISSION", 1);
+			db.insert("USER", null, initialValues);
+			return true;
+			
+		}catch (Exception e) {
+			message.writeLogCat("Falha ao Inserir Usuario Default");
+			return false;
+		}
+		finally
+		{
+			db.close();
+		}
+	}
+	
 	public boolean remove(User user) {
 		return false;
 	}

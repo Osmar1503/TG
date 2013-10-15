@@ -8,6 +8,7 @@ import java.util.UUID;
 import dm.trabalhograduacao.R;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -17,14 +18,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Core extends Activity {
 	private ImageView imgLight;
-	private boolean imgClicked = false;
-	
+	private boolean imgLightClicked = false;
+	private boolean imgBluetoothClicked = false;
+	private ImageView imgHome, imgTool, imgUser, imgBluetooth;
 	private static final String TAG = "daniema";	
 	private final int REQUEST_ENABLE_BT = 1;
 	private BluetoothAdapter btAdapter = null;
@@ -36,11 +40,34 @@ public class Core extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE); 
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.main);
+        
         try{
 	        initObjects();
-	        checkBTState();
-	        configureSocketAndStream();
+	        
+			final ProgressDialog dialog = ProgressDialog.show(this, "Aguarde", "Conectando Dispositivo ao Sistema de Controle", false, true);
+	        new Thread(){
+	    		@Override
+	    		public void run(){
+			        try {
+						checkBTState();
+				        configureSocketAndStream();
+				        dialog.cancel();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+	    		}
+	        }.start();
+	        
+	        if(btSocket.getRemoteDevice() == null || btSocket.getRemoteDevice().equals("")){
+	        	imgBluetoothClicked = false;
+				imgBluetooth.setImageResource(R.drawable.bluetooth_off);	
+	        }else{
+	        	imgBluetoothClicked = true;
+				imgBluetooth.setImageResource(R.drawable.bluetooth_on);
+	        }
         }catch (Exception e){}
     }
 
@@ -48,21 +75,62 @@ public class Core extends Activity {
     	try{
 	    	imgLight = (ImageView) findViewById(R.id.imgLight);
 	    	findViewById(R.id.imgLight).setKeepScreenOn(true);
+	    	
+	    	imgHome = (ImageView) findViewById(R.id.imgHome);
+	    	imgTool = (ImageView) findViewById(R.id.imgTool);
+	    	imgUser = (ImageView) findViewById(R.id.imgUser);
+	    	imgBluetooth = (ImageView) findViewById(R.id.imgBluetooth);
+	    	
+	    	
 	    	btAdapter = BluetoothAdapter.getDefaultAdapter();
 	    	
 	    	imgLight.setOnClickListener(new OnClickListener() {
 	 			public void onClick(View v) {
-	 				if (imgClicked){
+	 				if (imgLightClicked){
 	 					sendData("0");
-	 					imgClicked = false ;
+	 					imgLightClicked = false ;
 	 				}else{
 	 					sendData("9");
-	 					imgClicked = true ;
+	 					imgLightClicked = true ;
 	 				}
-	 				alterImage(imgClicked);
+	 				alterImage(imgLightClicked);
 	 			}
 	 		});
 	    	
+	    	imgHome.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Toast.makeText(getBaseContext(), "Home", Toast.LENGTH_SHORT).show();
+				}
+			});
+	    	
+	    	imgTool.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Toast.makeText(getBaseContext(), "Ferramentas", Toast.LENGTH_SHORT).show();
+				}
+			});
+	    	
+	    	imgUser.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					Toast.makeText(getBaseContext(), "Usuarios", Toast.LENGTH_SHORT).show();
+				}
+			});
+	    	
+	    	imgBluetooth.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					if(imgBluetoothClicked == true){
+						imgBluetoothClicked = false;
+						imgBluetooth.setImageResource(R.drawable.bluetooth_off);
+						Toast.makeText(getBaseContext(), "Desconectando do Sistema", Toast.LENGTH_SHORT).show();
+					}
+					else {
+						imgBluetoothClicked = true;
+						imgBluetooth.setImageResource(R.drawable.bluetooth_on);	
+						Toast.makeText(getBaseContext(), "Conectando no Sistema", Toast.LENGTH_SHORT).show();
+					}
+
+				}
+			});
+   	
     	}catch (Exception e){
     		Toast.makeText(getBaseContext(), "Falha ao Inicializar os Objetos: " + e.getMessage(), Toast.LENGTH_SHORT).show();
     	}
@@ -70,11 +138,11 @@ public class Core extends Activity {
 
     private void alterImage(boolean status){
     	if(status) imgLight.setImageResource(R.drawable.lamp_9); 
-    	else imgLight.setImageResource(R.drawable.lamp_0);;
+    	else imgLight.setImageResource(R.drawable.lamp_0);
     }
     
     private void checkBTState() throws Exception{
-    	try{
+		try{
 			if (btAdapter == null){
 				Toast.makeText(getBaseContext(), "Desculpas, mas seu dispositivo não suporta a tecnologia Bluetooth.", Toast.LENGTH_SHORT).show();
 				finish();
@@ -83,9 +151,9 @@ public class Core extends Activity {
 				Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 				startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
 			}
-    	}catch(Exception e){
-    		Toast.makeText(getBaseContext(), "Falha no checar estado do bluetooth: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-    	}
+		}catch(Exception e){
+			Toast.makeText(getBaseContext(), "Falha no checar estado do bluetooth: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+		}
 	}
     
     private void configureSocketAndStream() throws Exception{

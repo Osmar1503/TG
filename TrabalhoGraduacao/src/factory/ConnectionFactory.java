@@ -4,24 +4,15 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import controller.Message;
-import controller.ProgressControl;
 
 
 public class ConnectionFactory extends SQLiteOpenHelper{
 	private static final String DATABASE_NAME = "fatec";
 	private static final int VERSION = 1;
-	private ProgressControl progressControl;
 	private Message message = new Message();
 	
 	public ConnectionFactory(Context context){
 		super(context, DATABASE_NAME, null, VERSION);
-	}
-	
-	public ConnectionFactory(Context context, ProgressControl progressControl){
-		super(context, DATABASE_NAME, null, VERSION);
-		this.progressControl = progressControl;
-		this.progressControl.setProgress(15);
-		message.writeLogCat("Banco de Dados: " + DATABASE_NAME + ", Versão: " + VERSION + " criado com sucesso.");
 	}
 	
 	@Override
