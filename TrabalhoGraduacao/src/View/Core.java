@@ -61,13 +61,13 @@ public class Core extends Activity {
 	    		}
 	        }.start();
 	        
-	        if(btSocket.getRemoteDevice() == null || btSocket.getRemoteDevice().equals("")){
-	        	imgBluetoothClicked = false;
-				imgBluetooth.setImageResource(R.drawable.bluetooth_off);	
-	        }else{
-	        	imgBluetoothClicked = true;
-				imgBluetooth.setImageResource(R.drawable.bluetooth_on);
-	        }
+//	        if(btSocket.getRemoteDevice() == null || btSocket.getRemoteDevice().equals("")){
+//	        	imgBluetoothClicked = false;
+//				imgBluetooth.setImageResource(R.drawable.bluetooth_off);	
+//	        }else{
+//	        	imgBluetoothClicked = true;
+//				imgBluetooth.setImageResource(R.drawable.bluetooth_on);
+//	        }
         }catch (Exception e){}
     }
 
@@ -99,19 +99,19 @@ public class Core extends Activity {
 	    	
 	    	imgHome.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Toast.makeText(getBaseContext(), "Home", Toast.LENGTH_SHORT).show();
+					callHomeActivity();
 				}
 			});
 	    	
 	    	imgTool.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Toast.makeText(getBaseContext(), "Ferramentas", Toast.LENGTH_SHORT).show();
+					callToolsActivity();
 				}
 			});
 	    	
 	    	imgUser.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					Toast.makeText(getBaseContext(), "Usuarios", Toast.LENGTH_SHORT).show();
+					callUserActivity();
 				}
 			});
 	    	
@@ -197,6 +197,21 @@ public class Core extends Activity {
 		}catch(IOException e){}
 		catch(Exception e1){}
 	}  
+    
+    public void callHomeActivity() {
+		Intent intent = new Intent(Core.this, Home.class);
+		startActivityForResult(intent, 1);
+	}
+    
+    public void callToolsActivity() {
+		Intent intent = new Intent(Core.this, Tools.class);
+		startActivityForResult(intent, 1);
+	}
+    
+    public void callUserActivity() {
+		Intent intent = new Intent(Core.this, User.class);
+		startActivityForResult(intent, 1);
+	}
     
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

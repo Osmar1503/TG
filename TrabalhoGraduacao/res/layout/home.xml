@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imgIndexHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lamp_9"
+        android:contentDescription="@string/imgLight"
+        style="@style/imgIndexHome" />
+
+    <ImageView
+        android:id="@+id/imgIndexUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/user"
+        android:contentDescription="@string/imgMenuItemUser"
+        style="@style/imgIndexUser" />
+
+    <ImageView
+        android:id="@+id/imgIndexTool"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ferramentas"
+        android:contentDescription="@string/imgMenuItemTool"
+        style="@style/imgIndexTool" />
+
+    <ImageView
+        android:id="@+id/imgIndexAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/info"
+        android:contentDescription="@string/imgMenuAbout"
+		style="@style/imgIndexAbout" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/control"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtIndexHome" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/imgMenuItemUser"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtIndexUser" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/imgMenuItemTool"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtIndexTool" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/imgMenuAbout"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtIndexAbout" />
+ 
+</RelativeLayout>

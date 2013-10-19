@@ -50,23 +50,23 @@ public class Configuration extends Activity {
 				ConnectionFactory con = new ConnectionFactory(context);
 
 				UserDaoImpl userDao = new UserDaoImpl(context);
-				userDao.addDefaultUser();
+//				userDao.addDefaultUser();
 				userDao.listUser();
 				
 				timeToRead();
-				
+								
 				model.Tool tool = new model.Tool();
 				ToolDaoImpl toolDao = new ToolDaoImpl(context);
 				
 				tool.setDescription("Acender Lampada");
 				tool.setType(String.valueOf(Action.TURN_ON_LAMP));
-				toolDao.add(tool);
+//				toolDao.add(tool);
 				
 				timeToRead();
 				
 				tool.setDescription("Apagar Lampada");
 				tool.setType(String.valueOf(Action.TURN_OFF_LAMP));
-				toolDao.add(tool);
+//				toolDao.add(tool);
 				
 				toolDao.listTool();
 				

@@ -34,6 +34,26 @@
             android:screenOrientation="portrait">
         </activity>
         
+        <activity
+            android:name="view.Tools" 
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <activity
+            android:name="view.User" 
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name="view.Home" 
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <activity
+            android:name="view.About" 
+            android:screenOrientation="portrait">
+        </activity>
+        
     </application>
 
     

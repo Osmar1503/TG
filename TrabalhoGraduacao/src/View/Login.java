@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import controller.Logon;
+import controller.Message;
 import dm.trabalhograduacao.R;
 
 public class Login extends Activity{
@@ -21,6 +22,7 @@ public class Login extends Activity{
 	private TextView lblResponse;
 	private Button btnEntry;
 	private boolean permission;
+	Message message = new Message();
 		
 	@Override
     public void onCreate(Bundle savedInstanceState){
@@ -40,7 +42,7 @@ public class Login extends Activity{
 					Logon logon = new Logon();
 					permission = logon.validateLogin(String.valueOf(txtUser.getText()), String.valueOf(txtPassword.getText()), getBaseContext());
 					if (permission){
-						callCoreActivity();
+						callHomeActivity();
 					}else{
 						printMessage("Entrada não permitida. Tente novamente.");
 						clearValues();
@@ -77,10 +79,10 @@ public class Login extends Activity{
 		return true;
 	}
 	
-	private void callCoreActivity(){
-		Intent intent = new Intent(Login.this, Core.class);
+	private void callHomeActivity(){
+		Intent intent = new Intent(Login.this, Home.class);
 		startActivityForResult(intent, 1);
-		finish();
+//		finish();
 	}
 	
 	private void clearValues(){
