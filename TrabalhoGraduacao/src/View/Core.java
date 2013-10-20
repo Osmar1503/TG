@@ -27,8 +27,7 @@ import android.widget.Toast;
 public class Core extends Activity {
 	private ImageView imgLight;
 	private boolean imgLightClicked = false;
-	private boolean imgBluetoothClicked = false;
-	private ImageView imgHome, imgTool, imgUser, imgBluetooth;
+	private ImageView imgHome, imgTool, imgUser, imgBluetooth, imgLock;
 	private static final String TAG = "daniema";	
 	private final int REQUEST_ENABLE_BT = 1;
 	private BluetoothAdapter btAdapter = null;
@@ -36,6 +35,7 @@ public class Core extends Activity {
 	private OutputStream outStream = null;
 	private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 	private static String address = "00:13:01:09:07:78";
+	private boolean disconnected = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -46,28 +46,7 @@ public class Core extends Activity {
         
         try{
 	        initObjects();
-	        
-			final ProgressDialog dialog = ProgressDialog.show(this, "Aguarde", "Conectando Dispositivo ao Sistema de Controle", false, true);
-	        new Thread(){
-	    		@Override
-	    		public void run(){
-			        try {
-						checkBTState();
-				        configureSocketAndStream();
-				        dialog.cancel();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-	    		}
-	        }.start();
-	        
-//	        if(btSocket.getRemoteDevice() == null || btSocket.getRemoteDevice().equals("")){
-//	        	imgBluetoothClicked = false;
-//				imgBluetooth.setImageResource(R.drawable.bluetooth_off);	
-//	        }else{
-//	        	imgBluetoothClicked = true;
-//				imgBluetooth.setImageResource(R.drawable.bluetooth_on);
-//	        }
+	        connectSystem();
         }catch (Exception e){}
     }
 
@@ -80,7 +59,7 @@ public class Core extends Activity {
 	    	imgTool = (ImageView) findViewById(R.id.imgTool);
 	    	imgUser = (ImageView) findViewById(R.id.imgUser);
 	    	imgBluetooth = (ImageView) findViewById(R.id.imgBluetooth);
-	    	
+	    	imgLock = (ImageView) findViewById(R.id.imgLock);
 	    	
 	    	btAdapter = BluetoothAdapter.getDefaultAdapter();
 	    	
@@ -117,17 +96,25 @@ public class Core extends Activity {
 	    	
 	    	imgBluetooth.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					if(imgBluetoothClicked == true){
-						imgBluetoothClicked = false;
-						imgBluetooth.setImageResource(R.drawable.bluetooth_off);
-						Toast.makeText(getBaseContext(), "Desconectando do Sistema", Toast.LENGTH_SHORT).show();
+					if(disconnected == false){
+						try{
+							btSocket.close();
+							disconnected = true;
+							
+							imgBluetooth.setImageResource(R.drawable.bluetooh_off1);
+						}catch (Exception e){}
+						Toast.makeText(getBaseContext(), "Desconectado do Sistema", Toast.LENGTH_SHORT).show();
 					}
 					else {
-						imgBluetoothClicked = true;
-						imgBluetooth.setImageResource(R.drawable.bluetooth_on);	
-						Toast.makeText(getBaseContext(), "Conectando no Sistema", Toast.LENGTH_SHORT).show();
+						imgBluetooth.setImageResource(R.drawable.bluetooh_on1);
+						connectSystem();
 					}
-
+				}
+			});
+	    	
+	    	imgLock.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					callLoginActivity();
 				}
 			});
    	
@@ -136,6 +123,22 @@ public class Core extends Activity {
     	}
 	}
 
+    private void connectSystem(){
+		final ProgressDialog dialog = ProgressDialog.show(this, "Aguarde", "Conectando Dispositivo ao Sistema de Controle", false, true);
+        new Thread(){
+    		@Override
+    		public void run(){
+		        try {
+					checkBTState();
+			        configureSocketAndStream();
+			        dialog.cancel();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+    		}
+        }.start();
+    }
+    
     private void alterImage(boolean status){
     	if(status) imgLight.setImageResource(R.drawable.lamp_9); 
     	else imgLight.setImageResource(R.drawable.lamp_0);
@@ -166,6 +169,7 @@ public class Core extends Activity {
 			btAdapter.cancelDiscovery();			
 			try{
 				btSocket.connect();
+				disconnected = false;
 			}catch(IOException e){
 				try{
 					btSocket.close();
@@ -211,6 +215,12 @@ public class Core extends Activity {
     public void callUserActivity() {
 		Intent intent = new Intent(Core.this, User.class);
 		startActivityForResult(intent, 1);
+	}
+    
+    public void callLoginActivity() {
+		Intent intent = new Intent(Core.this, Login.class);
+		startActivityForResult(intent, 1);
+		finish();
 	}
     
 	@Override

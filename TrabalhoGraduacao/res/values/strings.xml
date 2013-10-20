@@ -14,10 +14,11 @@
     <string name="imgBluetooth">Estado da Conexão com Sistema</string>
     <string name="imgMenuBorder">Borda do Menu</string>
     <string name="imgMenuItemTool">Ferramentas</string>
-    <string name="imgMenuItemUser">Usuarios</string>
+    <string name="imgMenuItemUser">Usuários</string>
     <string name="imgMenuItemHome">Menu Principal</string>
     <string name="imgMenuAbout">Sobre</string>
     <string name="imgLight">Acender e apagar lâmpada</string>
+    <string name="imgLock">Bloquear</string>
     <string name="imgOk">Botão de Confirmação do Login</string>
     <string name="userRegister">Cadastro de Usuário</string>
     <string name="userTypeTitle">Tipo</string>

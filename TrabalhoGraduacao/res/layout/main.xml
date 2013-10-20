@@ -71,6 +71,18 @@
         android:scaleType="matrix"
         android:scaleX="0.4"
         android:scaleY="0.4"
-        android:src="@drawable/bluetooth_off" />
+        android:src="@drawable/bluetooh_off1" />
+
+    <ImageView
+        android:id="@+id/imgLock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgBluetooth"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/imgLock"
+        android:src="@drawable/lock3"
+        android:scaleType="matrix"
+        android:scaleX="0.4"
+        android:scaleY="0.4" />
     
 </RelativeLayout>

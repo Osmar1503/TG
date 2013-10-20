@@ -18,20 +18,18 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="27dp"
         android:text="@string/user"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        style="@style/txtLoginUsuario"/>
 
     <EditText 
         android:id="@+id/txtUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
         android:ems="10"
-        android:inputType="text" >
+        android:inputType="text"
+        android:background="@drawable/edittext_login"
+        style="@style/edtLoginUsuario" >
 
         <requestFocus />
     </EditText>
@@ -40,37 +38,34 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtUser"
-        android:layout_marginTop="15dp"
         android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtLoginSenha" />
 
     <EditText
         android:id="@+id/txtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:background="@drawable/edittext_login"
+        style="@style/edtLoginSenha" />
 
     <Button
         android:id="@+id/btnEntry"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="81dp"
-        android:text="@string/btnEntry" />
+        android:text="@string/btnEntry"
+        android:background="@drawable/edittext_login" 
+        style="@style/btnLoginEntrar" />
 
     <TextView
         android:id="@+id/lblResponse"
         android:textColor="#FF0000"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtPassword"
-        android:layout_centerHorizontal="true"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+		style="@style/txtLoginMsg" 
+         />
     
 </RelativeLayout>

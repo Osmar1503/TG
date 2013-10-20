@@ -31,18 +31,17 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="130dp"
         android:text="@string/loading"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        style="@style/txtMsgConfiguration" />
 
     <ProgressBar
         android:id="@+id/pgbConfiguration"
-        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="99dp"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:drawingCacheQuality="high" />
+        android:drawingCacheQuality="high"
+        style="@style/pgbConfiguration" />
 
 </RelativeLayout>

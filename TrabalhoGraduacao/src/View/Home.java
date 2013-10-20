@@ -22,8 +22,6 @@ public class Home extends Activity{
 		setContentView(R.layout.home);
 		
 		initObjects();
-		
-		
 	}
 	
 	private void initObjects(){

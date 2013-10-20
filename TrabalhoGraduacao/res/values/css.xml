@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Screen View -->
     <style name="imgIndexHome">
         <item name="android:scaleX">0.7</item>
         <item name="android:scaleY">0.7</item>
@@ -18,14 +19,14 @@
         <item name="android:scaleX">1</item>
         <item name="android:scaleY">1</item>
         <item name="android:translationX">200dp</item>
-        <item name="android:translationY">100dp</item>
+        <item name="android:translationY">110dp</item>
     </style>
     
 	<style name="imgIndexAbout">
         <item name="android:scaleX">0.8</item>
         <item name="android:scaleY">0.8</item>
         <item name="android:translationX">200dp</item>
-        <item name="android:translationY">270dp</item>
+        <item name="android:translationY">280dp</item>
     </style>
 
 	
@@ -50,6 +51,68 @@
         <item name="android:translationX">220dp</item>
         <item name="android:translationY">360dp</item>
     </style>
+	<!-- End Of Screen View -->
+	
+	<!-- Screen Configuration -->
+	<style name="pgbConfiguration" style="?android:attr/progressBarStyleLarge">
+	    <item name="android:scaleX">3</item>
+	    <item name="android:scaleY">3</item>
+        <item name="android:translationX">0dp</item>
+        <item name="android:translationY">-50dp</item>
+    </style>
     
+	<style name="txtMsgConfiguration">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">0dp</item>
+        <item name="android:translationY">-35dp</item>
+	</style>
+	<!-- End Of Screen Configuration -->
+	
+	<!-- Screen Login -->
+
+	<style name="txtLoginUsuario">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">50dp</item>
+        <item name="android:translationY">150dp</item>
+	</style>
+
+	<style name="edtLoginUsuario">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">50dp</item>
+        <item name="android:translationY">180dp</item>
+	</style>
+
+	<style name="txtLoginSenha">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">50dp</item>
+        <item name="android:translationY">230dp</item>
+	</style>
+	
+	<style name="edtLoginSenha">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">50dp</item>
+        <item name="android:translationY">260dp</item>
+	</style>
+	
+	<style name="btnLoginEntrar">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">100dp</item>
+        <item name="android:translationY">330dp</item>
+	</style>
+			
+	<style name="txtLoginMsg">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">300dp</item>
+	</style>
+	
+	<!-- End Of Screen Login -->
 	
 </resources>
