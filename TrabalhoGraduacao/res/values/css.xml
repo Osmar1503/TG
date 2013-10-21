@@ -115,4 +115,54 @@
 	
 	<!-- End Of Screen Login -->
 	
+	
+	<!-- Screen User --> 
+	
+	<style name="txtUserUser">
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">100dp</item>
+	</style>
+	
+	<style name="edtUserUser">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">130dp</item>
+	</style>
+
+	<style name="txtUserPassword">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">180dp</item>
+	</style>
+	
+	<style name="edtUserPassword">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">210dp</item>
+	</style>	
+	
+	<style name="txtUserType">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">270dp</item>
+	</style>	
+
+	<style name="rgUserType">
+	    <item name="android:scaleX">1</item>
+	    <item name="android:scaleY">1</item>
+        <item name="android:translationX">30dp</item>
+        <item name="android:translationY">300dp</item>
+	</style>		
+	
+	<style name="btnUserCadastre" >
+        <item name="android:translationX">100dp</item>
+        <item name="android:translationY">390dp</item>
+	</style>		
+	
+	<!-- End Of Screen User -->
+	
 </resources>

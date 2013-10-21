@@ -3,32 +3,22 @@ package view;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import controller.CadastreUser;
 import dm.trabalhograduacao.R;
 
+@SuppressWarnings("unused")
 public class User extends Activity{
 	
-
-	@SuppressWarnings("unused")
-	private EditText user;
-	@SuppressWarnings("unused")
-	private EditText password;
-	@SuppressWarnings("unused")
-	private EditText retryPassword;
-	@SuppressWarnings("unused")
-	private Button btnSign;
-	@SuppressWarnings("unused")
-	private RadioGroup rdgType;
-	@SuppressWarnings("unused")
+	private EditText edtUser, edtPassword;
+	private Button btnCadastre;
 	private RadioButton rbNormalType;
-	@SuppressWarnings("unused")
-	private RadioButton rbManagerType;
-	
 	
 	@Override
     public void onCreate(Bundle savedInstanceState){
@@ -42,11 +32,24 @@ public class User extends Activity{
 	}
 
 	private void initObjects(){
-		user = (EditText) findViewById(R.id.txtUserRegister);
-		password = (EditText) findViewById(R.id.txtPasswordRegister);
-		rdgType = (RadioGroup) findViewById(R.id.rdgType);
+		edtUser = (EditText) findViewById(R.id.txtUserRegister);
+		edtPassword = (EditText) findViewById(R.id.txtPasswordRegister);
 		rbNormalType = (RadioButton) findViewById(R.id.rdNormalType);
-		rbManagerType = (RadioButton) findViewById(R.id.rdManagerType);
+		btnCadastre = (Button) findViewById(R.id.btnCadastre);
+		
+		btnCadastre.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+//				CadastreUser cadastreUser = new CadastreUser(getBaseContext());
+//				
+//				model.User user = new model.User();
+//				user.setUser(edtUser.getText().toString());
+//				user.setPassword(edtPassword.getText().toString());
+//				if(rbNormalType.isChecked()) user.setPermission(1);
+//				else user.setPermission(0);
+//				
+//				cadastreUser.registreUser(user);
+			}
+		});
 	}
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

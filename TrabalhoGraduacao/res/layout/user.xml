@@ -17,39 +17,35 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="26dp"
         android:text="@string/user"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        style="@style/txtUserUser" />
 
     <EditText
         android:id="@+id/txtUserRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView2"
         android:ems="10" 
-        android:inputType="text"/>
+        android:inputType="text"
+        android:background="@drawable/edittext_login"
+        style="@style/edtUserUser" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtUserRegister"
-        android:layout_marginTop="19dp"
         android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtUserPassword" />
 
     <EditText
         android:id="@+id/txtPasswordRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
         android:ems="10"
-        android:inputType="textPassword" >
+        android:inputType="textPassword"
+        android:background="@drawable/edittext_login"
+        style="@style/edtUserPassword" >
 
         <requestFocus />
     </EditText>
@@ -58,18 +54,15 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtPasswordRegister"
-        android:layout_marginTop="26dp"
         android:text="@string/userTypeTitle"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        style="@style/txtUserType" />
 
     <RadioGroup
         android:id="@+id/rdgType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView4" >
+        style="@style/rgUserType" >
 
         <RadioButton
             android:id="@+id/rdNormalType"
@@ -86,12 +79,11 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/btnSign"
-        android:layout_width="fill_parent"
+        android:id="@+id/btnCadastre"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/rdgType"
-        android:layout_marginTop="15dp"
-        android:text="@string/btnSign" />
+        android:text="@string/btnSign"
+        android:background="@drawable/edittext_login"
+        style="@style/btnUserCadastre" />
     
 </RelativeLayout>

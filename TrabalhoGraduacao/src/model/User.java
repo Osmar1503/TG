@@ -8,6 +8,13 @@ public class User {
 	private String email;
 	private int permission;
 	
+	public User(){
+		user = "";
+		password = "";
+		email = "";
+		permission = 1;
+	}
+	
 	public int getId() {
 		return Id;
 	}
