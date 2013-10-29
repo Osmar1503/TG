@@ -5,8 +5,6 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
-import dm.trabalhograduacao.R;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -18,11 +16,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.Toast;
+import dm.trabalhograduacao.R;
 
 public class Core extends Activity {
 	private ImageView imgLight;
@@ -101,12 +100,12 @@ public class Core extends Activity {
 							btSocket.close();
 							disconnected = true;
 							
-							imgBluetooth.setImageResource(R.drawable.bluetooh_off1);
+							imgBluetooth.setImageResource(R.drawable.bluetooh_off);
 						}catch (Exception e){}
 						Toast.makeText(getBaseContext(), "Desconectado do Sistema", Toast.LENGTH_SHORT).show();
 					}
 					else {
-						imgBluetooth.setImageResource(R.drawable.bluetooh_on1);
+						imgBluetooth.setImageResource(R.drawable.bluetooh_on);
 						connectSystem();
 					}
 				}
@@ -205,16 +204,19 @@ public class Core extends Activity {
     public void callHomeActivity() {
 		Intent intent = new Intent(Core.this, Home.class);
 		startActivityForResult(intent, 1);
+		finish();
 	}
     
     public void callToolsActivity() {
 		Intent intent = new Intent(Core.this, Tools.class);
 		startActivityForResult(intent, 1);
+		finish();
 	}
     
     public void callUserActivity() {
-		Intent intent = new Intent(Core.this, User.class);
+		Intent intent = new Intent(Core.this, UserList.class);
 		startActivityForResult(intent, 1);
+		finish();
 	}
     
     public void callLoginActivity() {
@@ -255,5 +257,5 @@ public class Core extends Activity {
 		}catch (Exception e){}
 		super.onDestroy();
 	}
-
+	
 }

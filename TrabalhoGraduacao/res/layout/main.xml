@@ -71,7 +71,7 @@
         android:scaleType="matrix"
         android:scaleX="0.4"
         android:scaleY="0.4"
-        android:src="@drawable/bluetooh_off1" />
+        android:src="@drawable/bluetooh_off" />
 
     <ImageView
         android:id="@+id/imgLock"

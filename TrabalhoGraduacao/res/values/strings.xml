@@ -20,11 +20,15 @@
     <string name="imgLight">Acender e apagar lâmpada</string>
     <string name="imgLock">Bloquear</string>
     <string name="imgOk">Botão de Confirmação do Login</string>
+    <string name="imgAddUser">Adicionar Usuário</string>
+    <string name="imgExit">Sair do Sistema</string>
+    <string name="imgUserAvailable">Usuário Disponível</string>
+    <string name="Exit">Sair</string>
     <string name="userRegister">Cadastro de Usuário</string>
     <string name="userTypeTitle">Tipo</string>
     <string name="userNormalType">Normal</string>
     <string name="userManagerType">Administrador</string>
-    <string name="btnSign">Cadastrar</string>
+    <string name="btnConfirm"> Confirmar </string>
     <string name="functions">Funcionalidades</string>
     <string name="fatecImage">Logo da Fatec-SJC</string>
 	<string name="copyRight">Aluno:	Osmar Salles de Carvalho, 2013</string>

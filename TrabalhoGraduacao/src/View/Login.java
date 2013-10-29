@@ -3,14 +3,16 @@ package view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import controller.Logon;
 import controller.Message;
 import dm.trabalhograduacao.R;
@@ -23,6 +25,9 @@ public class Login extends Activity{
 	private Button btnEntry;
 	private boolean permission;
 	Message message = new Message();
+	
+	private long lastPressedTime;
+	private static final int PERIOD = 2000;
 		
 	@Override
     public void onCreate(Bundle savedInstanceState){
@@ -35,6 +40,16 @@ public class Login extends Activity{
     	applyButtonFunction();
 	}
 
+	private void initObjects(){
+		txtUser = (EditText) findViewById(R.id.txtUser);
+		txtPassword = (EditText) findViewById(R.id.txtPassword);
+		lblResponse = (TextView) findViewById(R.id.lblResponse);
+		btnEntry = (Button) findViewById(R.id.btnEntry);
+		permission = false;
+		txtUser.setText("admin");
+		txtPassword.setText("1503");
+	}
+	
 	private void applyButtonFunction(){
 		btnEntry.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -44,23 +59,12 @@ public class Login extends Activity{
 					if (permission){
 						callHomeActivity();
 					}else{
-						printMessage("Entrada não permitida. Tente novamente.");
+						printMessage("Usuário e/ou senha inválido. Tente novamente");
 						clearValues();
 					}
 				}
 			}
 		});
-	}
-	
-	private void initObjects(){
-		txtUser = (EditText) findViewById(R.id.txtUser);
-		txtPassword = (EditText) findViewById(R.id.txtPassword);
-		lblResponse = (TextView) findViewById(R.id.lblResponse);
-		btnEntry = (Button) findViewById(R.id.btnEntry);
-		permission = false;
-		
-		txtUser.setText("admin");
-		txtPassword.setText("1503");
 	}
 	
 	private void printMessage(String message){
@@ -69,11 +73,11 @@ public class Login extends Activity{
 	
 	private boolean ValidateFields(){
 		if(String.valueOf(txtUser.getText()).equals("")){
-			printMessage("Informe seu nome de Usuário.");
+			printMessage("Informe seu nome de Usuário");
 			return false;
 		}
 		if(String.valueOf(txtPassword.getText()).equals("")) {
-			printMessage("Informe sua Senha.");
+			printMessage("Informe sua Senha");
 			return false;
 		}
 		return true;
@@ -82,7 +86,7 @@ public class Login extends Activity{
 	private void callHomeActivity(){
 		Intent intent = new Intent(Login.this, Home.class);
 		startActivityForResult(intent, 1);
-//		finish();
+		finish();
 	}
 	
 	private void clearValues(){
@@ -97,8 +101,23 @@ public class Login extends Activity{
         return true;
     }	
 	
+
+
 	@Override
-	public void onBackPressed(){
-		
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+	        switch (event.getAction()) {
+	        case KeyEvent.ACTION_DOWN:
+	            if (event.getDownTime() - lastPressedTime < PERIOD) {
+	                finish();
+	            } else {
+	                Toast.makeText(getApplicationContext(), "Pressione duas vezes para sair", Toast.LENGTH_SHORT).show();
+	                lastPressedTime = event.getEventTime();
+	            }
+	            return true;
+	        }
+	    }
+	    return false;
 	}
+	
 }

@@ -55,27 +55,41 @@ public class Home extends Activity{
 		});
 	}
 	
-	 public void callControlActivity() {
-			Intent intent = new Intent(Home.this, Core.class);
-			startActivityForResult(intent, 1);
-			finish();
-		}
+	public void callControlActivity() {
+		Intent intent = new Intent(Home.this, Core.class);
+		startActivityForResult(intent, 1);
+		finish();
+	}
 	    
-	    public void callToolActivity() {
-			Intent intent = new Intent(Home.this, Tools.class);
-			startActivityForResult(intent, 1);
-		}
-	    
-	    public void callUserActivity() {
-			Intent intent = new Intent(Home.this, User.class);
-			startActivityForResult(intent, 1);
-		}
-	    
-	    public void callAboutActivity() {
-			Intent intent = new Intent(Home.this, About.class);
-			startActivityForResult(intent, 1);
-		}
+	public void callToolActivity() {
+		Intent intent = new Intent(Home.this, Tools.class);
+		startActivityForResult(intent, 1);
+		finish();
+	}
+    
+    public void callUserActivity() {
+		Intent intent = new Intent(Home.this, UserList.class);
+		startActivityForResult(intent, 1);
+		finish();
+	}
+    
+    public void callAboutActivity() {
+		Intent intent = new Intent(Home.this, About.class);
+		startActivityForResult(intent, 1);
+		finish();
+	}
+    
+    public void callLoginActivity(){
+    	Intent intent = new Intent(Home.this, Login.class);
+		startActivityForResult(intent, 1);
+		finish();
+    }
 	
+    @Override
+    public void onBackPressed(){
+    	callLoginActivity();
+    }
+    
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);

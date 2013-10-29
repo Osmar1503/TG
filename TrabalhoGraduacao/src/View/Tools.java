@@ -5,6 +5,7 @@ import java.util.List;
 
 import model.Tool;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
@@ -42,11 +43,22 @@ public class Tools extends Activity{
     	ListView listViewTools = (ListView) findViewById(R.id.lstTools);
     	listViewTools.setAdapter(ad);
 	}	
+
+    @Override
+    public void onBackPressed(){
+    	callHomeActivity();
+    }
+    
+    public void callHomeActivity(){
+    	Intent intent = new Intent(Tools.this, Home.class);
+		startActivityForResult(intent, 1);
+		finish();
+    }
 	
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-		
+	
 }

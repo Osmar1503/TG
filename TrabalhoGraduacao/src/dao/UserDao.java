@@ -9,7 +9,8 @@ public interface UserDao {
 	public boolean add(User user);
 	public boolean addDefaultUser();
 	public boolean remove (User user);
-	public boolean update(User user);
+	public boolean update(User oldUser, User newUser);
 	public List<User> listUser();
-	public boolean search(String userName, String password);
+	public User search(String userName, String password);
+	public User search(String userName);
 }

@@ -28,7 +28,9 @@
         android:ems="10" 
         android:inputType="text"
         android:background="@drawable/edittext_login"
-        style="@style/edtUserUser" />
+        style="@style/edtUserUser" >
+        <requestFocus />
+    </EditText>
 
     <TextView
         android:id="@+id/textView3"
@@ -45,10 +47,7 @@
         android:ems="10"
         android:inputType="textPassword"
         android:background="@drawable/edittext_login"
-        style="@style/edtUserPassword" >
-
-        <requestFocus />
-    </EditText>
+        style="@style/edtUserPassword" />
 
     <TextView
         android:id="@+id/textView4"
@@ -82,8 +81,17 @@
         android:id="@+id/btnCadastre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnSign"
+        android:text="@string/btnConfirm"
         android:background="@drawable/edittext_login"
         style="@style/btnUserCadastre" />
+
+    <ImageView
+        android:id="@+id/imgAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ok"
+        android:contentDescription="@string/imgUserAvailable"
+        style="@style/imgUserAvailable"
+         />
     
 </RelativeLayout>

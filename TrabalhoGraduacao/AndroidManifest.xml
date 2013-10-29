@@ -40,7 +40,7 @@
         </activity>
         
         <activity
-            android:name="view.User" 
+            android:name="view.UserCadastre" 
             android:screenOrientation="portrait">
         </activity>
 
@@ -51,6 +51,11 @@
         
         <activity
             android:name="view.About" 
+            android:screenOrientation="portrait">
+        </activity>
+        
+        <activity
+            android:name="view.UserList"
             android:screenOrientation="portrait">
         </activity>
         

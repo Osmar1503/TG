@@ -2,21 +2,24 @@ package controller;
 
 import android.content.Context;
 import dao.UserDaoImpl;
+import session.Session;
+import model.User;
 
 
 public class  Logon{
 	
-	public boolean validateLogin (String user, String password, Context context){
-		
+	public boolean validateLogin (String userName, String password, Context context){
 		UserDaoImpl userDao = new UserDaoImpl(context);
+		User user = new User();
 		
-		if(userDao.search(user, password)){
+		user = userDao.search(userName, password); 
+		
+		if(user != null){
+			Session.setUser(user);
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
-	public void logout(){}
 	
 }

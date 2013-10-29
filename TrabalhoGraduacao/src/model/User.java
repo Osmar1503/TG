@@ -12,7 +12,7 @@ public class User {
 		user = "";
 		password = "";
 		email = "";
-		permission = 1;
+		permission = 0;
 	}
 	
 	public int getId() {

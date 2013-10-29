@@ -90,7 +90,7 @@ public class Configuration extends Activity {
 
 	private void timeToRead(){
 		try {
-			Thread.sleep(100);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
