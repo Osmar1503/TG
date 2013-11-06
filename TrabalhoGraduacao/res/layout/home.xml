@@ -36,6 +36,16 @@
         android:contentDescription="@string/imgMenuAbout"
 		style="@style/imgIndexAbout" />
 
+    
+    <ImageView
+        android:id="@+id/imgListLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/log"
+        android:contentDescription="@string/imgListLog"
+		style="@style/imgListLog" />
+    
+    
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import dm.trabalhograduacao.R;
 
 public class Home extends Activity{
-	private ImageView imgHome, imgUser, imgTool, imgAbout;
+	private ImageView imgHome, imgUser, imgTool, imgAbout, imgListLog;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class Home extends Activity{
 		imgUser = (ImageView) findViewById(R.id.imgIndexUser);
 		imgTool = (ImageView) findViewById(R.id.imgIndexTool);
 		imgAbout = (ImageView) findViewById(R.id.imgIndexAbout);
+		imgListLog = (ImageView) findViewById(R.id.imgListLog);
 		
 		imgHome.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
@@ -51,6 +52,12 @@ public class Home extends Activity{
 		imgAbout.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				callAboutActivity();
+			}
+		});
+		
+		imgListLog.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				callListLogActivity();
 			}
 		});
 	}
@@ -85,6 +92,12 @@ public class Home extends Activity{
 		finish();
     }
 	
+    public void callListLogActivity(){
+    	Intent intent = new Intent(Home.this, Log.class);
+		startActivityForResult(intent, 1);
+		finish();
+    }
+    
     @Override
     public void onBackPressed(){
     	callLoginActivity();

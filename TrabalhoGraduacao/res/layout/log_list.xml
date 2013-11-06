@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView 
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/log"
+        style="@style/lblLog"
+        android:textAppearance="?android:attr/textAppearanceLarge" />"
+    
+    <ListView
+        android:id="@+id/lstLog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="71dp" >
+    </ListView>
+
+    <ImageView
+        android:id="@+id/imgClearLog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/clear_log"
+        android:contentDescription="@string/imgClearLog"
+        style="@style/imgClearLog" />
+    
+</RelativeLayout>

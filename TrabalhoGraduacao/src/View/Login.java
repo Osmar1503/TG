@@ -111,7 +111,7 @@ public class Login extends Activity{
 	            if (event.getDownTime() - lastPressedTime < PERIOD) {
 	                finish();
 	            } else {
-	                Toast.makeText(getApplicationContext(), "Pressione duas vezes para sair", Toast.LENGTH_SHORT).show();
+	                Toast.makeText(getApplicationContext(), "Pressione novamente para sair", Toast.LENGTH_SHORT).show();
 	                lastPressedTime = event.getEventTime();
 	            }
 	            return true;

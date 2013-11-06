@@ -30,6 +30,12 @@
         <item name="android:translationY">280dp</item>
     </style>
 
+    <style name="imgListLog">
+        <item name="android:scaleX">0.4</item>
+        <item name="android:scaleY">0.4</item>
+        <item name="android:translationX">250dp</item>
+        <item name="android:translationY">0dp</item>
+    </style>
 	
 	
 	<style name="txtIndexHome">
@@ -174,8 +180,6 @@
         <item name="android:translationY">130dp</item>
 	</style>	
 	
-		
-	
 	<!-- End Of Screen User -->
 	
 	<!-- Screen UserList --> 
@@ -188,5 +192,23 @@
     </style>	
 	
 	<!-- End Of Screen UserList -->
+	
+	<!-- Screen Log -->
+		
+    <style name="lblLog">
+        <item name="android:scaleX">1</item>
+        <item name="android:scaleY">1</item>
+        <item name="android:translationX">130dp</item>
+        <item name="android:translationY">0dp</item>
+    </style>	
+    
+    <style name="imgClearLog">
+        <item name="android:scaleX">0.4</item>
+        <item name="android:scaleY">0.4</item>
+        <item name="android:translationX">250dp</item>
+        <item name="android:translationY">0dp</item>
+    </style>
+	
+	<!-- End Of Screen Log -->
 	
 </resources>

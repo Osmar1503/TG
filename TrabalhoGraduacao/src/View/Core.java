@@ -5,6 +5,10 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
+import session.Session;
+
+import model.Action;
+import model.Log;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -13,7 +17,6 @@ import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,13 +24,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
+import controller.RegistreLog;
 import dm.trabalhograduacao.R;
 
 public class Core extends Activity {
 	private ImageView imgLight;
 	private boolean imgLightClicked = false;
 	private ImageView imgHome, imgTool, imgUser, imgBluetooth, imgLock;
-	private static final String TAG = "daniema";	
 	private final int REQUEST_ENABLE_BT = 1;
 	private BluetoothAdapter btAdapter = null;
 	private BluetoothSocket btSocket = null;
@@ -72,6 +75,7 @@ public class Core extends Activity {
 	 					imgLightClicked = true ;
 	 				}
 	 				alterImage(imgLightClicked);
+	 				registreLog(imgLightClicked);
 	 			}
 	 		});
 	    	
@@ -186,7 +190,6 @@ public class Core extends Activity {
 				final Method m = device.getClass().getMethod("createInsecureRfcommSocketToServiceRecord", new Class[]{UUID.class});
 				return (BluetoothSocket) m.invoke(device, MY_UUID);
 			}catch(Exception e){
-				Log.e(TAG, "Não pode criar Conexão", e);
 				Toast.makeText(getBaseContext(), "Falha no createBluetoothSocket: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 			}
 		}
@@ -224,6 +227,22 @@ public class Core extends Activity {
 		startActivityForResult(intent, 1);
 		finish();
 	}
+    
+    private void registreLog(boolean status){
+    	RegistreLog registre = new RegistreLog(getBaseContext());
+    	
+    	Log log = new Log();
+    	log.setUserName(Session.getUser().getUser());
+    	if(status) log.setToolAction(String.valueOf(Action.TURN_ON_LAMP)); 
+    	else log.setToolAction(String.valueOf(Action.TURN_OFF_LAMP));
+    	log.setActualDate();
+    	registre.registre(log);
+    }
+    
+    @Override
+    public void onBackPressed(){
+    	callHomeActivity();
+    }
     
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {

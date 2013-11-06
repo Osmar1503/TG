@@ -59,6 +59,11 @@
             android:screenOrientation="portrait">
         </activity>
         
+       	<activity
+            android:name="view.Log"
+            android:screenOrientation="portrait">
+        </activity>
+        
     </application>
 
     

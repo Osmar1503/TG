@@ -5,12 +5,26 @@ import java.util.Calendar;
 public class Log {
 	
 	private int id;
-	private int Userid;
-	private int Toolid;
+	private String UserName;
+	private String ToolAction;
 	private String date;
 	
-	public Log(){
-		setDate(generateDate());
+	public Log(){}
+	
+	public String getUserName() {
+		return UserName;
+	}
+
+	public void setUserName(String userName) {
+		UserName = userName;
+	}
+
+	public String getToolAction() {
+		return ToolAction;
+	}
+
+	public void setToolAction(String toolAction) {
+		ToolAction = toolAction;
 	}
 	
 	public int getId() {
@@ -21,22 +35,6 @@ public class Log {
 		this.id = id;
 	}
 
-	public int getUserid() {
-		return Userid;
-	}
-
-	public void setUserid(int userid) {
-		Userid = userid;
-	}
-
-	public int getToolid() {
-		return Toolid;
-	}
-
-	public void setToolid(int toolid) {
-		Toolid = toolid;
-	}
-
 	public String getDate() {
 		return date;
 	}
@@ -44,10 +42,21 @@ public class Log {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	
+	public void setActualDate(){
+		this.date = generateDate();
+	}
 		
 	public String generateDate(){
-		String _date = Calendar.DAY_OF_MONTH + "/" + Calendar.MONTH + "/" + Calendar.YEAR + " " + Calendar.HOUR_OF_DAY + ":" + 
-					   Calendar.MINUTE + ":" + Calendar.SECOND;
+		Calendar c = Calendar.getInstance();
+		String _date = "";
+		_date += c.get(Calendar.DAY_OF_MONTH) + "/";
+		_date += c.get(Calendar.MONTH)+1 + "/";
+		_date += c.get(Calendar.YEAR) + " ";
+		_date += c.get(Calendar.HOUR_OF_DAY) + ":";
+		_date += c.get(Calendar.MINUTE) + ":";
+		_date += c.get(Calendar.SECOND);
+		
 		return _date;
 	}
 

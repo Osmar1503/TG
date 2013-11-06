@@ -12,6 +12,7 @@
     <string name="retryPassword">Repetir Senha</string>
     <string name="btnEntry">Entrar</string>
     <string name="imgBluetooth">Estado da Conexão com Sistema</string>
+    <string name="imgClearLog">Limpar Log</string>
     <string name="imgMenuBorder">Borda do Menu</string>
     <string name="imgMenuItemTool">Ferramentas</string>
     <string name="imgMenuItemUser">Usuários</string>
@@ -23,6 +24,7 @@
     <string name="imgAddUser">Adicionar Usuário</string>
     <string name="imgExit">Sair do Sistema</string>
     <string name="imgUserAvailable">Usuário Disponível</string>
+    <string name="imgListLog">Listar Log</string>
     <string name="Exit">Sair</string>
     <string name="userRegister">Cadastro de Usuário</string>
     <string name="userTypeTitle">Tipo</string>
@@ -34,5 +36,6 @@
 	<string name="copyRight">Aluno:	Osmar Salles de Carvalho, 2013</string>
 	<string name="loading">Aguarde</string>
 	<string name="control">Controle</string>
+	<string name="log">Log</string>
 	
 </resources>

@@ -39,11 +39,14 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 		String toolTable = "CREATE TABLE TOOL (" +
 				" TOOL_ID INTEGER PRIMARY KEY AUTOINCREMENT, ACTION TEXT, DESCRIPTION TEXT);";
 
+		String logTable = "CREATE TABLE LOG (" +
+				" LOG_ID INTEGER PRIMARY KEY AUTOINCREMENT, USER_NAME INTEGER, TOOL_ACTION INTEGER, DATE TEXT);";
 		
 		db.beginTransaction();
 		try{
 			ExecutarComandosSQL(db, userTable);
 			ExecutarComandosSQL(db, toolTable);
+			ExecutarComandosSQL(db, logTable);
 			
 			db.setTransactionSuccessful();
 		}catch(Exception e){
@@ -56,14 +59,16 @@ public class ConnectionFactory extends SQLiteOpenHelper{
 	private void dropTables(SQLiteDatabase db){
 		String userTable = "DROP TABLE USER;";
 		String toolTable = "DROP TABLE TOOL;";
+		String logTable = "DROP TABLE LOG;";
 		
 		db.beginTransaction();
 		try{
 			ExecutarComandosSQL(db, userTable);
 			ExecutarComandosSQL(db, toolTable);
+			ExecutarComandosSQL(db, logTable);
 		}catch(Exception e){
 			message.printSpace();
-			message.writeLogCat("Falha ao Remover a Tabela Tool: " + e.getMessage());
+			message.writeLogCat("Falha ao Remover a Tabela: " + e.getMessage());
 			message.printSpace();
 		}finally{
 			db.endTransaction();
